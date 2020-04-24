@@ -7,7 +7,7 @@ export const NavBar = () => {
       <Container>
         <Menu.Item header>
           <img src="/assets/logo.png" alt="logo" />
-          Reactivities
+          ReedOnline
         </Menu.Item>
         <Menu.Item name="Activities" />
         <Menu.Item>

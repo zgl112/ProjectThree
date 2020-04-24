@@ -42,7 +42,7 @@ namespace Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Activities");
+                    b.ToTable("jobs");
                 });
 
             modelBuilder.Entity("Domain.Value", b =>
