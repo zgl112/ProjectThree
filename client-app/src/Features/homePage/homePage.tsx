@@ -1,24 +1,15 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { NavBar } from "../nav/NavBar";
+import { Jobs } from "../Jobs/Jobs";
+import { Container } from "semantic-ui-react";
 
 export const Homepage = () => {
   return (
-    <div>
-      <NavBar />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <div>
-        <p>This is our homepage!</p>
-      </div>
-    </div>
+    <Fragment>
+      <Container style={{ marginTop: "7em" }}>
+        <NavBar />
+        <Jobs />
+      </Container>
+    </Fragment>
   );
 };

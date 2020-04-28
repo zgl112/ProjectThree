@@ -1,9 +1,10 @@
 import React from "react";
+import { Container, Image } from "semantic-ui-react";
 
 export const Jobs = () => {
   return (
-    <div>
-      <p>We are in the job component! WELL DONE!</p>
-    </div>
+    <Container fluid className={"jobscontainer"}>
+      <Image src="assets/logoreed.png" fluid />
+    </Container>
   );
 };

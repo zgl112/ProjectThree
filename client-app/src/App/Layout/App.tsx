@@ -30,7 +30,10 @@ const App = () => {
           render={() => (
             <Fragment>
               <NavBar />
-              <Container style={{ marginTop: "7em" }}>
+              <Container
+                className={"mapcontainer"}
+                style={{ marginTop: "6em" }}
+              >
                 <Switch>
                   <Route exact path="/" component={Homepage} />
                   <Route exact path="/jobs" component={Jobs} />
