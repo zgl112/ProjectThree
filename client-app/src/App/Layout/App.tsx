@@ -18,7 +18,7 @@ import { Recruiting } from "../../Features/Recruiting/Recruiting";
 import { RegisterCV } from "../../Features/Users/RegisterCV";
 import { SignIn } from "../../Features/Users/SignIn";
 import { Shortlistedjobs } from "../../Features/Users/Shortlistedjobs";
-
+import { Footer } from "../../Features/Footer/Footer";
 const App = () => {
   return (
     <Fragment>
@@ -30,10 +30,7 @@ const App = () => {
           render={() => (
             <Fragment>
               <NavBar />
-              <Container
-                className={"mapcontainer"}
-                style={{ marginTop: "6em" }}
-              >
+              <Container style={{ marginTop: "7em" }}>
                 <Switch>
                   <Route exact path="/" component={Homepage} />
                   <Route exact path="/jobs" component={Jobs} />
@@ -57,7 +54,9 @@ const App = () => {
             </Fragment>
           )}
         />
+         <Footer />
       </BrowserRouter>
+            
     </Fragment>
   );
 };
