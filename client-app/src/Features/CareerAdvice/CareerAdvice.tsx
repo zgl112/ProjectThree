@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
+import { Container } from "semantic-ui-react";
+import { UnderConstruction } from "../../App/Layout/UnderConstruction";
 
 export const CareerAdvice = () => {
-    return (
-        <div>
-            
-        </div>
-    )
-}
+  return (
+    <Container>
+      <UnderConstruction />
+    </Container>
+  );
+};

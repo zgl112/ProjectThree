@@ -21,7 +21,7 @@ import { Shortlistedjobs } from "../../Features/Users/Shortlistedjobs";
 import { Footer } from "../../Features/Footer/Footer";
 const App = () => {
   return (
-    <Fragment>
+    <Fragment >
       <BrowserRouter>
         <ToastContainer position="bottom-right" />
         <Route exact path="/" component={Homepage} />
@@ -30,7 +30,7 @@ const App = () => {
           render={() => (
             <Fragment>
               <NavBar />
-              <Container style={{ marginTop: "7em" }}>
+              <Container fluid style={{ width: "100%" }}>
                 <Switch>
                   <Route exact path="/" component={Homepage} />
                   <Route exact path="/jobs" component={Jobs} />
@@ -54,9 +54,8 @@ const App = () => {
             </Fragment>
           )}
         />
-         <Footer />
+        <Footer />
       </BrowserRouter>
-            
     </Fragment>
   );
 };
