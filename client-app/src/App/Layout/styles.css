@@ -95,4 +95,15 @@ body {
   /* border: 2px solid rgb(233, 220, 220); */
 }
 
-.searchHeader{}
+.searchFormLanding {
+ top: 32px;
+ padding: 10px;
+ left: 27.5%
+}
+.searchFormStyleLanding {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+
+  
+}

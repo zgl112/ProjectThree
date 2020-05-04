@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import NotFound from "./NotFound";
-import { Container } from "semantic-ui-react";
+import { Container, SearchResult } from "semantic-ui-react";
 import { NavBar } from "../../Features/nav/NavBar";
 import {
   Route,
@@ -19,6 +19,7 @@ import { RegisterCV } from "../../Features/Users/RegisterCV";
 import { SignIn } from "../../Features/Users/SignIn";
 import { Shortlistedjobs } from "../../Features/Users/Shortlistedjobs";
 import { Footer } from "../../Features/Footer/Footer";
+import {SearchResults} from "../../Features/JobSeekerLandingPage/SearchResults"
 const App = () => {
   return (
     <Fragment >
@@ -34,7 +35,7 @@ const App = () => {
                 <Switch>
                   <Route exact path="/" component={Homepage} />
                   <Route exact path="/jobs" component={Jobs} />
-                  <Route exact path="/courses" component={Courses} />
+                  <Route exact path="/courses" component={SearchResults} />
                   <Route
                     exact
                     path={"/careeradvice"}
