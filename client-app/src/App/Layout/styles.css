@@ -96,14 +96,12 @@ body {
 }
 
 .searchFormLanding {
- top: 32px;
- padding: 10px;
- left: 27.5%
+  top: 38px;
+  padding: 10px;
+  left: 27.5%;
 }
 .searchFormStyleLanding {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-
-  
 }

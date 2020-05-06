@@ -19,10 +19,10 @@ import { RegisterCV } from "../../Features/Users/RegisterCV";
 import { SignIn } from "../../Features/Users/SignIn";
 import { Shortlistedjobs } from "../../Features/Users/Shortlistedjobs";
 import { Footer } from "../../Features/Footer/Footer";
-import {SearchResults} from "../../Features/JobSeekerLandingPage/SearchResults"
+import { SearchResults } from "../../Features/JobSeekerLandingPage/SearchResults";
 const App = () => {
   return (
-    <Fragment >
+    <Fragment>
       <BrowserRouter>
         <ToastContainer position="bottom-right" />
         <Route exact path="/" component={Homepage} />
@@ -31,7 +31,10 @@ const App = () => {
           render={() => (
             <Fragment>
               <NavBar />
-              <Container fluid style={{ width: "100%" }}>
+              <Container
+                fluid
+                style={{ width: "100%", backgroundColor: "	rgb(176,176,176)" }}
+              >
                 <Switch>
                   <Route exact path="/" component={Homepage} />
                   <Route exact path="/jobs" component={Jobs} />

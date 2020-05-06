@@ -6,7 +6,7 @@ import { Container } from "semantic-ui-react";
 export const Homepage = () => {
   return (
     <Fragment>
-      <Container style={{ marginTop: "7em" }}>
+      <Container fluid>
         <NavBar />
         <Jobs />
       </Container>

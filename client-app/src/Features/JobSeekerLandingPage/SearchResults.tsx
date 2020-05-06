@@ -1,20 +1,13 @@
-import React from 'react'
-import {SearchBar} from './Features/SearchBar'
-import { Container, Segment } from 'semantic-ui-react'
-// const searchLanding = {
-//         position: "relative",
-//         paddingTop: "35px",
-//         width: "100%",
-//         height: "auto",
-//         color: "white",
-//         textAlign: "center",
-//     }
-    
+import React from "react";
+import { SearchBar } from "./Features/SearchBar";
+import { Container, Segment, Divider } from "semantic-ui-react";
+import { FiltersAndCards } from "./Features/FiltersAndCards";
 export const SearchResults = () => {
-    return (
-        <Segment >
-        <SearchBar/>
-        </Segment>
-    )
-}
-
+  return (
+    <Segment>
+      <SearchBar />
+      <Divider section />
+      <FiltersAndCards />
+    </Segment>
+  );
+};
