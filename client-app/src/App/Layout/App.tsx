@@ -20,6 +20,7 @@ import { SignIn } from "../../Features/Users/SignIn";
 import { Shortlistedjobs } from "../../Features/Users/Shortlistedjobs";
 import { Footer } from "../../Features/Footer/Footer";
 import { SearchResults } from "../../Features/JobSeekerLandingPage/SearchResults";
+import { DetailedView } from "../../Features/JobSeekerLandingPage/DetailedView";
 const App = () => {
   return (
     <Fragment>
@@ -45,7 +46,7 @@ const App = () => {
                     component={CareerAdvice}
                   />
                   <Route exact path="/recruiting" component={Recruiting} />
-                  <Route exact path="/registercv" component={RegisterCV} />
+                  <Route exact path="/registercv" component={DetailedView} />
                   <Route exact path="/signin/" component={SignIn} />
                   <Route
                     exact
