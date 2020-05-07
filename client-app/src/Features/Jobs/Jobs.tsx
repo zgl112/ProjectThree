@@ -9,7 +9,7 @@ import { Courses } from "./Features/Courses";
 
 export const Jobs = () => {
   return (
-    <Segment>
+    <Segment >
       <SearchBar />
       <Divider section />
       <TrendingJob />

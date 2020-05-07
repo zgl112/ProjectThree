@@ -16,9 +16,11 @@ export const SearchBar = () => {
         style={{
           fontSize: "1.7em",
           fontWeight: "normal",
-          marginTop: "1.5em",
+          marginTop: "1.4em",
           textAlign: "center",
           paddingTop: "100px",
+          
+          
         }}
       />
       <Container>

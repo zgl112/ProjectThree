@@ -1,5 +1,5 @@
 import React from 'react'
-import {Grid, Card, GridColumn, GridRow, Image, Header, Icon, Modal, Button, CardGroup, Segment} from 'semantic-ui-react'
+import {Grid, Card, GridColumn, GridRow, Image, Header, Icon, Modal, Button, CardGroup, Segment, SegmentGroup} from 'semantic-ui-react'
 import { NavLink } from 'react-router-dom'
 export const JobCard = () => {
     return (
@@ -114,8 +114,46 @@ In-house Training and Development Team
                     </GridRow>
                    
                 </GridColumn>
-                <GridColumn width= "4">
-                    <GridRow><Button></Button></GridRow>
+                <GridColumn width= "4" >
+                    <GridRow ><Button style={{width: "100%", backgroundColor: "#e84188", color: "white", border: "1px solid #e84188",
+                  borderRadius: "8px", marginBottom: "15px", marginTop: "25px", padding: "9px"}}> <p style={{ fontWeight: 'bold' }}>Apply Now</p></Button>
+                  
+                    <Button
+                floated="right"
+                style={{
+                  backgroundColor: "transparent",
+                  border: "1px solid #0079d1",
+                  borderRadius: "8px",
+                  color: "#0079d1",
+                  width: "100%",
+                  padding: "7px"
+                
+                 
+                }}
+              >
+               <p style={{ fontWeight: 'bold' }}> <Icon name= "share alternate"></Icon>Share job</p>
+              </Button>
+              <SegmentGroup style= {{marginTop: "54px"}}>
+                <Segment>
+                
+                <Grid>
+                  <GridRow  as={NavLink}
+            to="/jobs">
+                    <p style= {{textAlign: "center", width: "100%"}}>Placeholder company</p>
+                  </GridRow>
+                  </Grid>
+                  </Segment>
+                 
+                  <Segment>
+                    <Grid>
+                    <GridRow  as={NavLink}
+            to="/jobs">
+                    <p style= {{textAlign: "center", width: "100%"}}>About this company</p>
+                  </GridRow>
+                </Grid>
+              </Segment>
+              </SegmentGroup>
+              </GridRow>
                 </GridColumn>
             </Grid>
                       </Card.Content>

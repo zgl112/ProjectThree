@@ -5,11 +5,11 @@ import { Container } from "semantic-ui-react";
 
 export const Homepage = () => {
   return (
-    <Fragment>
+    
       <Container fluid>
         <NavBar />
         <Jobs />
       </Container>
-    </Fragment>
+    
   );
 };
