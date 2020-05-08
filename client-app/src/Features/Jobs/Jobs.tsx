@@ -9,12 +9,20 @@ import { Courses } from "./Features/Courses";
 
 export const Jobs = () => {
   return (
-    <Segment >
+    <Segment
+      style={{
+        margin: "0px",
+        paddingRight: "0px",
+        paddingLeft: "0px",
+        borderLeftWidth: "0px",
+        borderRightWidth: "0px",
+      }}
+    >
       <SearchBar />
-      <Divider section />
+
       <TrendingJob />
       <DisplayJobsCard />
-      <Divider section />
+
       <Courses />
       <Sectors />
       <Locations />

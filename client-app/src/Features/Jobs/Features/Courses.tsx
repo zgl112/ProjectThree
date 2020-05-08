@@ -21,6 +21,8 @@ const textStyle = {
 export const Courses = () => {
   return (
     <Container>
+      <br />
+      <br />
       <Grid>
         <Grid.Row centered>
           <Image

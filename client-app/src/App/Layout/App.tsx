@@ -2,13 +2,7 @@ import React, { Fragment } from "react";
 import NotFound from "./NotFound";
 import { Container, SearchResult } from "semantic-ui-react";
 import { NavBar } from "../../Features/nav/NavBar";
-import {
-  Route,
-  withRouter,
-  RouteComponentProps,
-  Switch,
-  BrowserRouter,
-} from "react-router-dom";
+import { Route, Switch, BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { Homepage } from "../../Features/Homepage/Homepage";
 import { Jobs } from "../../Features/Jobs/Jobs";
@@ -34,7 +28,10 @@ const App = () => {
               <NavBar />
               <Container
                 fluid
-                style={{ width: "100%", backgroundColor: "	rgb(176,176,176)" }}
+                style={{
+                  width: "100%",
+                  backgroundColor: "	rgb(176,176,176)",
+                }}
               >
                 <Switch>
                   <Route exact path="/" component={Homepage} />

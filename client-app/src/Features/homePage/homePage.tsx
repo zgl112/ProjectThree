@@ -5,11 +5,9 @@ import { Container } from "semantic-ui-react";
 
 export const Homepage = () => {
   return (
-    
-      <Container fluid>
-        <NavBar />
-        <Jobs />
-      </Container>
-    
+    <Container fluid>
+      <NavBar />
+      <Jobs />
+    </Container>
   );
 };

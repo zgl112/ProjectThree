@@ -1,5 +1,12 @@
 import React from "react";
-import { Button, Container, Header, Form, Grid } from "semantic-ui-react";
+import {
+  Button,
+  Container,
+  Header,
+  Form,
+  Grid,
+  GridColumn,
+} from "semantic-ui-react";
 
 export const SearchBar = () => {
   return (
@@ -8,21 +15,14 @@ export const SearchBar = () => {
       className="searchContainer"
       style={{ backgroundImage: "url(/assets/searchBar.png)" }}
     >
-      <Header
-        className="searchHeader"
-        as="h2"
-        content="Jobs count placeholder"
-        inverted
-        style={{
-          fontSize: "1.7em",
-          fontWeight: "normal",
-          marginTop: "1.4em",
-          textAlign: "center",
-          paddingTop: "100px",
-          
-          
-        }}
-      />
+      <Grid centered>
+        <GridColumn className="phcounter">
+          <Header style={{ textAlign: "center", color: "white" }}>
+            Search 87,776 new jobs - 4,112 added in the last 24 hours
+          </Header>
+        </GridColumn>{" "}
+      </Grid>
+
       <Container>
         <Grid centered>
           <Form className="searchForm">
