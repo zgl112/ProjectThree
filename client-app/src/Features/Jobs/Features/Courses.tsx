@@ -6,20 +6,21 @@ import {
   Item,
   Button,
   Container,
+  GridRow,
 } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 
 const textStyle = {
   position: "absolute",
-  bottom: "34%",
+  bottom: "300%",
   width: "100%",
-  height: "auto",
   color: "white",
   textAlign: "center",
 };
 
 export const Courses = () => {
   return (
+<<<<<<< Updated upstream
     <Container centered>
      
       <Grid >
@@ -29,6 +30,26 @@ export const Courses = () => {
             fluid
             style={{ height: "80%", width: "80%", filter: "brightness(60%)" }}
           />
+=======
+    <Container className="imageContainer">
+      <br />
+      <br />
+
+      <Container className="imageContainer">
+        <Image
+          className="imageCourse"
+          src="/assets/courses.png"
+          fluid
+          style={{
+            filter: "brightness(60%)",
+            height: "auto",
+            width: "100%",
+          }}
+        />
+      </Container>
+      <Grid>
+        <Grid.Row centered>
+>>>>>>> Stashed changes
           <Segment basic style={textStyle}>
             <Item.Group>
               <Item>
@@ -63,6 +84,3 @@ export const Courses = () => {
     </Container>
   );
 };
-// Find the right course
-// Invest in your future with thousands of courses to help you learn and develop.
-// Now with an extra 10% off
