@@ -8,7 +8,7 @@ import {
   Segment,
   Item,
 } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const textStyle = {
   position: "absolute",
@@ -35,12 +35,14 @@ export const Sectors = () => {
         <Grid.Row>
           <Grid.Column width={4}>
             <Grid>
-              <Grid.Row centered>
+              <Grid.Row centered as={NavLink}
+                    to="/registercv">
                 <Image
                   circular
                   src="/assets/technology.png"
                   style={{ filter: "brightness(80%)" }}
                 />
+                <Item className="overlay"/>
                 <Segment basic style={textStyle}>
                   <Item.Group>
                     <Item>
@@ -64,12 +66,14 @@ export const Sectors = () => {
           </Grid.Column>
           <Grid.Column width={4}>
             <Grid>
-              <Grid.Row centered>
+              <Grid.Row centered as={NavLink}
+                    to="/registercv">
                 <Image
                   circular
                   src="/assets/engineering.png"
                   style={{ filter: "brightness(80%)" }}
                 />
+                <Item className="overlay"/>
                 <Segment basic style={textStyle}>
                   <Item.Group>
                     <Item>
@@ -93,12 +97,14 @@ export const Sectors = () => {
           </Grid.Column>
           <Grid.Column width={4}>
             <Grid>
-              <Grid.Row centered>
+              <Grid.Row centered as={NavLink}
+                    to="/registercv">
                 <Image
                   circular
                   src="/assets/graduation.png"
                   style={{ filter: "brightness(80%)" }}
                 />
+                <Item className="overlay"/>
                 <Segment basic style={textStyle}>
                   <Item.Group>
                     <Item>
@@ -122,12 +128,14 @@ export const Sectors = () => {
           </Grid.Column>
           <Grid.Column width={4}>
             <Grid>
-              <Grid.Row centered>
+              <Grid.Row centered as={NavLink}
+                    to="/registercv">
                 <Image
                   circular
                   src="/assets/health.png"
                   style={{ filter: "brightness(80%)" }}
                 />
+                <Item className="overlay"/>
                 <Segment basic style={textStyle}>
                   <Item.Group>
                     <Item>

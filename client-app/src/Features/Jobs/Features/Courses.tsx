@@ -20,11 +20,10 @@ const textStyle = {
 
 export const Courses = () => {
   return (
-    <Container>
-      <br />
-      <br />
-      <Grid>
-        <Grid.Row centered>
+    <Container centered>
+     
+      <Grid >
+        <Grid.Row centered >
           <Image
             src="/assets/courses.png"
             fluid

@@ -116,3 +116,33 @@ body {
   flex-direction: row;
   align-items: flex-end;
 }
+
+.ui.centered.grid, .ui.centered.grid>.row, .ui.grid>.centered.row
+{
+  position: relative;
+ 
+}
+
+.overlay {
+  position: absolute;
+  background-color: black;
+  opacity: 0.2;
+  overflow: hidden;
+  width: 90%;
+  height: 90%;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: .3s ease;
+  transition: .3s ease;
+  border-radius: 50%;
+
+
+}
+
+.ui.centered.grid, .ui.centered.grid>.row, .ui.grid>.centered.row:hover .overlay {
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
