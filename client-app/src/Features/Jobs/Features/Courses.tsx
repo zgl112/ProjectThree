@@ -20,17 +20,6 @@ const textStyle = {
 
 export const Courses = () => {
   return (
-<<<<<<< Updated upstream
-    <Container centered>
-     
-      <Grid >
-        <Grid.Row centered >
-          <Image
-            src="/assets/courses.png"
-            fluid
-            style={{ height: "80%", width: "80%", filter: "brightness(60%)" }}
-          />
-=======
     <Container className="imageContainer">
       <br />
       <br />
@@ -49,7 +38,6 @@ export const Courses = () => {
       </Container>
       <Grid>
         <Grid.Row centered>
->>>>>>> Stashed changes
           <Segment basic style={textStyle}>
             <Item.Group>
               <Item>

@@ -1,12 +1,11 @@
-using Application.Activities;
+using Application.ElasticSearch;
+using Application.JobsApi;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Persistance;
 
 namespace API
 {
@@ -19,25 +18,28 @@ namespace API
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(opt =>
-            {
-                opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
-            });
             services.AddCors(opt =>
             {
                 opt.AddPolicy("CorsPolicy", policy =>
                  {
                      policy.AllowAnyHeader()
                      .AllowAnyMethod()
-                     .WithOrigins("http://localhost:3000");
+                     .WithOrigins("https://localhost:3000")
+                     .AllowCredentials()
+
+                      .WithOrigins("https://localhost:5000");
 
                  });
             });
-            services.AddMediatR(typeof(List.Handler).Assembly);
+            services.AddTransient<IJobBatchProcess, JobBatchProcess>();
+
+            services.AddMediatR(typeof(SearchJob.Handler).Assembly);
+            services.AddMediatR(typeof(SingleJob.Handler).Assembly);
+            services.AddMediatR(typeof(IndexBulkJobs.Handler).Assembly);
             services.AddControllers();
+            services.Configure<Application.API>(Configuration.GetSection("API"));
 
         }
 
@@ -47,18 +49,20 @@ namespace API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+
+
+                // app.UseHttpsRedirection();
+
+                app.UseRouting();
+
+                app.UseAuthorization();
+                app.UseCors("CorsPolicy");
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers();
+                });
             }
-
-            // app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-            app.UseCors("CorsPolicy");
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
         }
     }
 }

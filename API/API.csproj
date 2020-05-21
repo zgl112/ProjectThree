@@ -4,8 +4,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.2"/>
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.2"/>
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>a8e9595c-d510-48da-8078-29ebd620cc69</UserSecretsId>
   </PropertyGroup>
 </Project>

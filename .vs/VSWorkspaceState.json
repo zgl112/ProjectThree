@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\API",
+    "\\API\\Controllers",
+    "\\Application",
+    "\\Application\\ElasticSearch",
+    "\\Application\\JobsApi"
+  ],
+  "SelectedNode": "\\API\\API.csproj",
+  "PreviewInSolutionExplorer": false
+}

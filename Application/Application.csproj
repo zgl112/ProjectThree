@@ -1,12 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj"/>
     <ProjectReference Include="..\Persistance\Persistance.csproj"/>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0"/>
+    <PackageReference Include="NEST" Version="7.6.2"/>
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.2"/>
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <UserSecretsId>d75c1238-3911-46e3-9944-2b32e30f9a88</UserSecretsId>
   </PropertyGroup>
 </Project>
