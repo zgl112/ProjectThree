@@ -1,6 +1,6 @@
 import React from "react";
 import { SearchBar } from "./Features/SearchBar";
-import { Container, Segment, Divider } from "semantic-ui-react";
+import { Segment, Divider } from "semantic-ui-react";
 import { FiltersAndCards } from "./Features/FiltersAndCards";
 export const SearchResults = () => {
   return (

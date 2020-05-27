@@ -1,0 +1,46 @@
+import axios, { AxiosResponse } from "axios";
+import { toast } from "react-toastify";
+import { history } from "../..";
+import { ICounter, IJobResult, IQueryRequest } from "../Models/Models";
+
+axios.defaults.baseURL = "http://localhost:5000/api/search";
+
+axios.interceptors.response.use(undefined, (error) => {
+  if (error.message === "Network Error" && !error.respone) {
+    toast.error("Network error - Servers are currently offline.");
+  }
+  const { status } = error.response;
+
+  if (status === 404) {
+    history.push("/notfound");
+  }
+  if (status === 500) {
+    history.push("/notfound");
+  }
+});
+
+const responseBody = (response: AxiosResponse) => response.data;
+
+const sleep = (ms: number) => (response: AxiosResponse) =>
+  new Promise<AxiosResponse>((resolve) =>
+    setTimeout(() => resolve(response), ms)
+  );
+
+const requests = {
+  get: (url: string) => axios.get(url).then(responseBody),
+  post: (url: string, body: {}) =>
+    axios.post(url, body).then(sleep(10)).then(responseBody),
+  put: (url: string, body: {}) =>
+    axios.put(url, body).then(sleep(10)).then(responseBody),
+  delete: (url: string) => axios.delete(url).then(sleep(10)).then(responseBody),
+};
+
+const Jobs = {
+  counter: (): Promise<ICounter> => requests.get("/counter"),
+  detailedJob: (id: number): Promise<IJobResult> =>
+    requests.get(`/result/${id}`),
+  listJobs: (form: IQueryRequest): Promise<IJobResult[]> =>
+    requests.get(`/results`),
+};
+
+export default Jobs;

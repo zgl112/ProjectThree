@@ -6,7 +6,6 @@ import {
   Item,
   Button,
   Container,
-  GridRow,
 } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 

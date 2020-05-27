@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { observer } from "mobx-react-lite";
 import {
   Button,
   Container,
@@ -7,8 +8,17 @@ import {
   Grid,
   GridColumn,
 } from "semantic-ui-react";
+import { JobStore } from "../../../App/Store/jobsStore";
+import { LoadingComponent } from "../../../App/Layout/LoadingComponent";
 
-export const SearchBar = () => {
+const SearchBar = () => {
+  const jobsStore = useContext(JobStore);
+  const { jobsCounter, counter, loadingInitial } = jobsStore;
+
+  useEffect(() => {
+    jobsCounter();
+  }, [jobsCounter]);
+
   return (
     <Container
       fluid
@@ -17,9 +27,14 @@ export const SearchBar = () => {
     >
       <Grid centered>
         <GridColumn className="phcounter">
-          <Header style={{ textAlign: "center", color: "white" }}>
-            Search 87,776 new jobs - 4,112 added in the last 24 hours
-          </Header>
+          {counter?.totalJobs === 0 ? (
+            <Header style={{ textAlign: "center", color: "white" }} />
+          ) : (
+            <Header style={{ textAlign: "center", color: "white" }}>
+              Search {counter?.totalJobs} new jobs - {counter?.addedToday} added
+              in the last 24 hours!
+            </Header>
+          )}
         </GridColumn>{" "}
       </Grid>
 
@@ -49,3 +64,4 @@ export const SearchBar = () => {
     </Container>
   );
 };
+export default observer(SearchBar);

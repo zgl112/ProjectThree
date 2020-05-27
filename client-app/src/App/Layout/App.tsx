@@ -1,20 +1,21 @@
 import React, { Fragment } from "react";
 import NotFound from "./NotFound";
-import { Container, SearchResult } from "semantic-ui-react";
+import { Container } from "semantic-ui-react";
 import { NavBar } from "../../Features/nav/NavBar";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { Homepage } from "../../Features/Homepage/Homepage";
 import { Jobs } from "../../Features/Jobs/Jobs";
-import { Courses } from "../../Features/Courses/Courses";
+//import { Courses } from "../../Features/Courses/Courses";
 import { CareerAdvice } from "../../Features/CareerAdvice/CareerAdvice";
 import { Recruiting } from "../../Features/Recruiting/Recruiting";
-import { RegisterCV } from "../../Features/Users/RegisterCV";
+//import { RegisterCV } from "../../Features/Users/RegisterCV";
 import { SignIn } from "../../Features/Users/SignIn";
 import { Shortlistedjobs } from "../../Features/Users/Shortlistedjobs";
 import { Footer } from "../../Features/Footer/Footer";
 import { SearchResults } from "../../Features/JobSeekerLandingPage/SearchResults";
 import { DetailedView } from "../../Features/JobSeekerLandingPage/DetailedView";
+import "mobx-react-lite/batchingForReactDom";
 const App = () => {
   return (
     <Fragment>

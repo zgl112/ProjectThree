@@ -15,7 +15,7 @@ namespace Application.ElasticSearch
 {
     public class JobBatchProcess : IJobBatchProcess
     {
-        private int _counter;
+
         private readonly API _settings;
 
         public JobBatchProcess(IOptions<API> settings)
@@ -45,21 +45,21 @@ namespace Application.ElasticSearch
             return jobs.Results.ToList();
         }
 
-        public async Task Counter()
+        public async Task<int> Counter()
         {
             var url = _settings.ApiEndpoint;
             HttpResponseMessage response = await APIClient().GetAsync($"{url}search?keywords=all");
             response.EnsureSuccessStatusCode();
             string responseBody = await response.Content.ReadAsStringAsync();
             var jobs = JsonConvert.DeserializeObject<SearchResult>(responseBody);
-            _counter = jobs.TotalResults;
+            return jobs.TotalResults;
 
         }
 
         public async Task AllResults()
         {
-            //  await Counter();
-            for (var x = 0; x <= 2; x += 100)
+            var number = await Counter();
+            for (var x = 0; x <= number; x += 100)
             {
                 var batch = await GetJobsIds(56);
                 foreach (var id in batch)

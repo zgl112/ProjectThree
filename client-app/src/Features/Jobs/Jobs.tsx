@@ -1,6 +1,6 @@
 import React from "react";
-import { Segment, Divider } from "semantic-ui-react";
-import { SearchBar } from "./Features/SearchBar";
+import { Segment } from "semantic-ui-react";
+import SearchBar from "./Features/SearchBar";
 import { TrendingJob } from "./Features/TrendingJob";
 import { DisplayJobsCard } from "./Features/DisplayJobsCard";
 import { Sectors } from "./Features/Sectors";

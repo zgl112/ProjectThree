@@ -42,5 +42,11 @@ namespace API.Controllers
         {
             await Mediator.Send(new IndexBulkJobs.Command { });
         }
+
+        [HttpGet("counter")]
+        public async Task<Domain.Counter> Counter()
+        {
+            return await Mediator.Send(new Counter.Command { });
+        }
     }
 }

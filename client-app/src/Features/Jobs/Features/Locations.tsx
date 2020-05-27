@@ -1,14 +1,6 @@
 import React from "react";
-import {
-  Container,
-  Grid,
-  Card,
-  List,
-  Image,
-  Segment,
-  Item,
-} from "semantic-ui-react";
-import { Link, NavLink } from "react-router-dom";
+import { Container, Grid, List, Image, Segment, Item } from "semantic-ui-react";
+import { NavLink } from "react-router-dom";
 
 const textStyle = {
   position: "absolute",
@@ -19,19 +11,9 @@ const textStyle = {
   textAlign: "center",
 };
 
-
-const Overlay = {
-  ":hover":
-  {
-    backgroundColor: "black"
-  }
-}
-
-
-
 export const Locations = () => {
   return (
-    <Container >
+    <Container>
       <br style={{ lineHeight: "10px" }} />
 
       <h1 style={{ textAlign: "center" }}>Browse local jobs</h1>
@@ -42,20 +24,17 @@ export const Locations = () => {
       <Grid centered>
         <br />
 
-        <Grid.Row >
+        <Grid.Row>
           <Grid.Column width={4}>
             <Grid>
-              <Grid.Row centered as={NavLink}
-                    to="/registercv">
-              
-                <Image 
+              <Grid.Row centered as={NavLink} to="/registercv">
+                <Image
                   src="/assets/london.png"
                   circular
-                  style={{filter: "brightness(80%)" }}
+                  style={{ filter: "brightness(80%)" }}
                 />
-                <Item className="overlay"/>
-    
-  
+                <Item className="overlay" />
+
                 <Segment basic style={textStyle}>
                   <Item.Group>
                     <Item>
@@ -79,14 +58,13 @@ export const Locations = () => {
           </Grid.Column>
           <Grid.Column width={4}>
             <Grid>
-              <Grid.Row centered as={NavLink}
-                    to="/registercv">
+              <Grid.Row centered as={NavLink} to="/registercv">
                 <Image
                   circular
                   src="/assets/glasgow.png"
                   style={{ filter: "brightness(80%)" }}
                 />
-                <Item className="overlay"/>
+                <Item className="overlay" />
                 <Segment basic style={textStyle}>
                   <Item.Group>
                     <Item>
@@ -110,14 +88,13 @@ export const Locations = () => {
           </Grid.Column>
           <Grid.Column width={4}>
             <Grid>
-              <Grid.Row centered as={NavLink}
-                    to="/registercv">
+              <Grid.Row centered as={NavLink} to="/registercv">
                 <Image
                   circular
                   src="/assets/manchester.png"
                   style={{ filter: "brightness(80%)" }}
                 />
-                <Item className="overlay"/>
+                <Item className="overlay" />
                 <Segment basic style={textStyle}>
                   <Item.Group>
                     <Item>
@@ -141,14 +118,13 @@ export const Locations = () => {
           </Grid.Column>
           <Grid.Column width={4}>
             <Grid>
-              <Grid.Row centered as={NavLink}
-                    to="/registercv">
+              <Grid.Row centered as={NavLink} to="/registercv">
                 <Image
                   circular
                   src="/assets/liverpool.png"
                   style={{ filter: "brightness(80%)" }}
                 />
-                <Item className="overlay"/>
+                <Item className="overlay" />
                 <Segment basic style={textStyle}>
                   <Item.Group>
                     <Item>

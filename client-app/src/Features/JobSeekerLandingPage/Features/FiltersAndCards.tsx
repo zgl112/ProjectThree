@@ -1,22 +1,15 @@
 import React from "react";
-import {
-  Grid,
-  GridColumn,
-  Header,
-  Container,
-  Card,
-  Icon,
-} from "semantic-ui-react";
+import { Grid, GridColumn, Header, Container } from "semantic-ui-react";
 import { Filters } from "./Filters";
 import { Cards } from "./Cards";
 
 export const FiltersAndCards = () => {
   return (
-    <Container >
+    <Container>
       <Header content="Jobs Counter Placeholder" size="large" />
       <Grid>
         <GridColumn width={4}>
-          <Filters  />
+          <Filters />
         </GridColumn>
         <GridColumn width={12}>
           <Cards />

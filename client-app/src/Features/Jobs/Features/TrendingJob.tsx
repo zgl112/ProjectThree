@@ -1,5 +1,5 @@
 import React from "react";
-import { Segment, Container, Grid, List, Header } from "semantic-ui-react";
+import { Container, Grid, List } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 export const TrendingJob = () => {
   return (

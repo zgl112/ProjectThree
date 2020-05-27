@@ -2,7 +2,6 @@ import React from "react";
 import {
   Card,
   Icon,
-  Container,
   Image,
   CardGroup,
   GridRow,
@@ -11,7 +10,6 @@ import {
   Header,
   Button,
   Modal,
-  Divider,
 } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 
