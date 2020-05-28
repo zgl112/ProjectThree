@@ -1,7 +1,8 @@
 import axios, { AxiosResponse } from "axios";
 import { toast } from "react-toastify";
 import { history } from "../..";
-import { ICounter, IJobResult, IQueryRequest } from "../Models/Models";
+import { ICounter, IJobResult, IQueryRequest, IListSearchResult } from "../Models/Models";
+
 
 axios.defaults.baseURL = "http://localhost:5000/api/search";
 
@@ -39,8 +40,8 @@ const Jobs = {
   counter: (): Promise<ICounter> => requests.get("/counter"),
   detailedJob: (id: number): Promise<IJobResult> =>
     requests.get(`/result/${id}`),
-  listJobs: (form: IQueryRequest): Promise<IJobResult[]> =>
-    requests.get(`/results`),
+  listJobs: (form: IQueryRequest): Promise<IListSearchResult> =>
+    requests.post(`/results`, form),
 };
 
 export default Jobs;

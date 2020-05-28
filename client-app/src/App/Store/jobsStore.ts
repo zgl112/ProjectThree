@@ -1,5 +1,5 @@
 import { observable, action, runInAction, configure } from "mobx";
-import { ICounter } from "../Models/Models";
+import { ICounter, IQueryRequest, IJobResult, IListSearchResult } from "../Models/Models";
 import agent from "../API/agent";
 import { createContext } from "react";
 
@@ -10,7 +10,8 @@ export class JobsStore {
   @observable counterRegistry = new Map();
   @observable loadingInitial = false;
   @observable addedToday: number | undefined;
-
+  @observable jobs : IListSearchResult | undefined; 
+  @observable jobsRegistry = new Map();
   @observable appLoaded = false;
 
   @action setAppLoaded = () => {
@@ -28,6 +29,19 @@ export class JobsStore {
       console.log(error);
     }
   };
-}
+  @action listJobs = async (form: IQueryRequest) => {
+    try {
+      let jobs = await agent.listJobs(form);
+    
+      runInAction("get list", () => {
+        this.jobs = jobs;
+        this.jobsRegistry.set(jobs, this.jobs);
+      });
+      return jobs;
+     } catch (error) {
+      console.log(error);
+    }
+  }
+};
 
 export const JobStore = createContext(new JobsStore());
