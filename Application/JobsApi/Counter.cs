@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Application.JobsApi
 {
-    public class Counter
+    public class Count
     {
         public class Command : IRequest<Domain.Counter>
         {

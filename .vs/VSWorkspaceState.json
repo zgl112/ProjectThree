@@ -3,10 +3,11 @@
     "",
     "\\API",
     "\\API\\Controllers",
+    "\\API\\Properties",
     "\\Application",
     "\\Application\\ElasticSearch",
     "\\Application\\JobsApi"
   ],
-  "SelectedNode": "\\API\\API.csproj",
+  "SelectedNode": "\\API\\Controllers\\SearchController.cs",
   "PreviewInSolutionExplorer": false
 }

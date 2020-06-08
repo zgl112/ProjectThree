@@ -14,7 +14,16 @@ namespace Application.ElasticSearch
         private QueryContainer _partTimeQuery;
         private QueryContainer _fullTimeQuery;
         private QueryContainer _contractTypeQuery;
+        private QueryContainer _matchId;
 
+        public void MatchId(int jobId)
+        {
+            _matchId = new MatchQuery
+            {
+                Field = "jobId",
+                Query = jobId.ToString()
+            };
+        }
         public void JobTitle(string title)
         {
 
@@ -164,6 +173,7 @@ namespace Application.ElasticSearch
                 },
                 Should = new List<QueryContainer>
                 {
+                    _matchId,
                     _partTimeQuery,
                     _fullTimeQuery,
                     _contractTypeQuery

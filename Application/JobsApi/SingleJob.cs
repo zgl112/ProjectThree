@@ -5,16 +5,17 @@ using System.Threading.Tasks;
 using Application.ElasticSearch;
 using Domain;
 using MediatR;
+using Nest;
 
 namespace Application.JobsApi
 {
     public class SingleJob
     {
-        public class Query : IRequest<List<JobModel>>
+        public class Query : MediatR.IRequest<Domain.JobModel>
         {
             public int Id { get; set; }
         }
-        public class Handler : IRequestHandler<Query, List<JobModel>>
+        public class Handler : IRequestHandler<Query, JobModel>
         {
             private readonly IJobBatchProcess _config;
 
@@ -24,11 +25,22 @@ namespace Application.JobsApi
             }
 
 
-            public Task<List<JobModel>> Handle(Query request, CancellationToken cancellationToken)
+            public Task<JobModel> Handle(Query request, CancellationToken cancellationToken)
             {
-                var response = _config.ElClient().Search<JobModel>(s => s.Query(q => q.Bool(b => b.Filter(f => f.Term(t => t.Field(x => x.JobId).Value(request.Id))))));
-                return Task.FromResult(response.Documents.Take(1).ToList());
+                var descriptor = new SearchDescriptor<JobModel>().Take(20);
+                var queryBuilder = new QueryBuilder();
+                queryBuilder.MatchId(request.Id);
 
+                var boolQuery = queryBuilder.Build();
+
+                var queryResult = _config.ElClient().Search<JobModel>(descriptor.Query(q => boolQuery));
+                var result = queryResult.Documents.Take(1).ToList();
+                var job = new JobModel();
+                foreach (var x in result)
+                {
+                    job = x;
+                }
+                return Task.FromResult(job);
             }
         }
     }

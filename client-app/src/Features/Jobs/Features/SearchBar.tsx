@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { observer } from "mobx-react-lite";
+import { history } from "../../../index";
 import {
   Button,
   Container,
@@ -10,10 +11,18 @@ import {
 } from "semantic-ui-react";
 import { JobStore } from "../../../App/Store/jobsStore";
 import { LoadingComponent } from "../../../App/Layout/LoadingComponent";
+import { IQueryRequest } from "../../../App/Models/Models";
+import { Form as FinalForm, Field } from "react-final-form";
+import { Route, Link, NavLink } from "react-router-dom";
+import SearchResults from "../../JobSeekerLandingPage/SearchResults";
 
 const SearchBar = () => {
   const jobsStore = useContext(JobStore);
-  const { jobsCounter, counter, loadingInitial } = jobsStore;
+  const { jobsCounter, counter, query, getListJobs } = jobsStore;
+  const onSubmit = async (data: IQueryRequest) => {
+    await getListJobs(data);
+    history.push("/jobs/results");
+  };
 
   useEffect(() => {
     jobsCounter();
@@ -40,25 +49,40 @@ const SearchBar = () => {
 
       <Container>
         <Grid centered>
-          <Form className="searchForm">
-            <Form.Group className="searchFormStyle">
-              <Form.Field>
-                <label style={{ color: "white", textAlign: "left" }}>
-                  What
-                </label>
-                <Form.Input placeholder="e.g. nurse" />
-              </Form.Field>
-              <Form.Field>
-                <label style={{ color: "white", textAlign: "left" }}>
-                  Where
-                </label>
-                <Form.Input placeholder="location or postcode" />
-              </Form.Field>
-              <Form.Field>
-                <Button primary>Search</Button>
-              </Form.Field>
-            </Form.Group>
-          </Form>
+          <FinalForm
+            onSubmit={onSubmit}
+            render={({ handleSubmit }) => (
+              <Form className="searchForm" onSubmit={handleSubmit}>
+                <Form.Group className="searchFormStyle">
+                  <Form.Field>
+                    <label style={{ color: "white", textAlign: "left" }}>
+                      What
+                    </label>
+                    <Field
+                      placeholder="e.g. nurse"
+                      name="jobTitle"
+                      value={query?.jobTitle}
+                      component="input"
+                    />{" "}
+                  </Form.Field>
+                  <Form.Field>
+                    <label style={{ color: "white", textAlign: "left" }}>
+                      Where
+                    </label>
+                    <Field
+                      placeholder="location or postcode"
+                      value={query?.locationName}
+                      name="locationName"
+                      component="input"
+                    />
+                  </Form.Field>
+                  <Form.Field>
+                    <Button primary>Search</Button>
+                  </Form.Field>
+                </Form.Group>
+              </Form>
+            )}
+          ></FinalForm>
         </Grid>
       </Container>
     </Container>

@@ -49,7 +49,7 @@ namespace Application.ElasticSearch
         {
             var url = _settings.ApiEndpoint;
             HttpResponseMessage response = await APIClient().GetAsync($"{url}search?keywords=all");
-            response.EnsureSuccessStatusCode();
+           // response.EnsureSuccessStatusCode();
             string responseBody = await response.Content.ReadAsStringAsync();
             var jobs = JsonConvert.DeserializeObject<SearchResult>(responseBody);
             return jobs.TotalResults;
@@ -59,7 +59,7 @@ namespace Application.ElasticSearch
         public async Task AllResults()
         {
             var number = await Counter();
-            for (var x = 0; x <= number; x += 100)
+            for (var x = 0; x <= 1000; x += 100)
             {
                 var batch = await GetJobsIds(56);
                 foreach (var id in batch)
@@ -79,12 +79,12 @@ namespace Application.ElasticSearch
             var user = _settings.ElasticUser;
             var pwd = _settings.ElasticPwd;
             settings.BasicAuthentication(user, pwd);
-            settings.DefaultIndex("reed99").EnableDebugMode()
+            settings.DefaultIndex("reedlatest").EnableDebugMode()
             .DisableDirectStreaming()
             .PrettyJson();
 
             var client = new ElasticClient(settings);
-            var createIndexResponse = client.Indices.Create("reed99", c => c
+            var createIndexResponse = client.Indices.Create("reedlatest", c => c
             .Settings(s => s
                 .NumberOfShards(1)
                 .NumberOfReplicas(0))
@@ -94,7 +94,7 @@ namespace Application.ElasticSearch
         }
         public void SetSendJob(JobModel job)
         {
-            ElClient().Index(new IndexRequest<JobModel>(job, "reed99"));
+            ElClient().Index(new IndexRequest<JobModel>(job, "reedlatest"));
         }
         public async Task<JobModel> GetJob(int id)
         {

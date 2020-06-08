@@ -1,5 +1,7 @@
-export interface IQueryRequest {
-  jobtitle?: string;
+import { RouteChildrenProps, RouteComponentProps } from "react-router-dom";
+
+export interface IQueryRequest extends URLSearchParams {
+  jobTitle?: string;
   locationName?: string;
   minimumSalary?: number;
   maximumSalary?: number;
@@ -7,6 +9,18 @@ export interface IQueryRequest {
   partTime?: boolean;
   fullTime?: boolean;
   contract?: string;
+}
+
+export interface IQuery {
+  jobTitle?: string;
+  locationName?: string;
+  minimumSalary?: number;
+  maximumSalary?: number;
+  date?: Date;
+  partTime?: boolean;
+  fullTime?: boolean;
+  contract?: string;
+  jobId?: number;
 }
 
 export interface IJobResult {
@@ -32,7 +46,8 @@ export interface IJobResult {
 }
 
 export interface IListSearchResult {
-  jobs: IJobResult[];
+  count: number;
+  lists: IJobResult[];
 }
 
 export interface ICounter {

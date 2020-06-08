@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, GridColumn, Header, Container } from "semantic-ui-react";
 import { Filters } from "./Filters";
-import { Cards } from "./Cards";
+import Cards from "./Cards";
 
 export const FiltersAndCards = () => {
   return (

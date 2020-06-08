@@ -6,15 +6,15 @@ import { Route, Switch, BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { Homepage } from "../../Features/Homepage/Homepage";
 import { Jobs } from "../../Features/Jobs/Jobs";
-//import { Courses } from "../../Features/Courses/Courses";
+import { Courses } from "../../Features/Courses/Courses";
 import { CareerAdvice } from "../../Features/CareerAdvice/CareerAdvice";
 import { Recruiting } from "../../Features/Recruiting/Recruiting";
-//import { RegisterCV } from "../../Features/Users/RegisterCV";
+import { RegisterCV } from "../../Features/Users/RegisterCV";
 import { SignIn } from "../../Features/Users/SignIn";
 import { Shortlistedjobs } from "../../Features/Users/Shortlistedjobs";
 import { Footer } from "../../Features/Footer/Footer";
-import { SearchResults } from "../../Features/JobSeekerLandingPage/SearchResults";
-import { DetailedView } from "../../Features/JobSeekerLandingPage/DetailedView";
+import SearchResults from "../../Features/JobSeekerLandingPage/SearchResults";
+import DetailedView from "../../Features/JobSeekerLandingPage/DetailedView";
 import "mobx-react-lite/batchingForReactDom";
 const App = () => {
   return (
@@ -37,14 +37,20 @@ const App = () => {
                 <Switch>
                   <Route exact path="/" component={Homepage} />
                   <Route exact path="/jobs" component={Jobs} />
-                  <Route exact path="/courses" component={SearchResults} />
+                  <Route path="/jobs/results" component={SearchResults} />
+                  <Route exact path="/courses" component={Courses} />
+                  <Route
+                    exact
+                    path="/jobs/result/:id"
+                    component={DetailedView}
+                  />
                   <Route
                     exact
                     path={"/careeradvice"}
                     component={CareerAdvice}
                   />
                   <Route exact path="/recruiting" component={Recruiting} />
-                  <Route exact path="/registercv" component={DetailedView} />
+                  <Route exact path="/registercv" component={RegisterCV} />
                   <Route exact path="/signin/" component={SignIn} />
                   <Route
                     exact

@@ -5,6 +5,7 @@ using JobModel = Domain.JobModel;
 using System;
 using Application.ElasticSearch.Models;
 using Application.JobsApi;
+using Domain;
 
 namespace API.Controllers
 {
@@ -13,11 +14,11 @@ namespace API.Controllers
     {
 
         [HttpGet("results")]
-        public async Task<List<JobModel>> SearchJobs(string jobtitle, string locationName, int? minimumSalary, int? maximumSalary, DateTime? date, bool? partTime, bool? fullTime, string contractType)
+        public async Task<ListJobs> SearchJobs(string jobTitle, string locationName, int? minimumSalary, int? maximumSalary, DateTime? date, bool? partTime, bool? fullTime, string contractType)
         {
             var query = new QueryRequest
             {
-                JobTitle = jobtitle,
+                JobTitle = jobTitle,
                 LocationName = locationName,
                 MinimumSalary = minimumSalary,
                 MaximumSalary = maximumSalary,
@@ -32,7 +33,7 @@ namespace API.Controllers
 
 
         [HttpGet("result/{id}")]
-        public async Task<List<JobModel>> SingleJob(int id)
+        public async Task<JobModel> SingleJob(int id)
         {
             return await Mediator.Send(new SingleJob.Query { Id = id });
         }
@@ -46,7 +47,7 @@ namespace API.Controllers
         [HttpGet("counter")]
         public async Task<Domain.Counter> Counter()
         {
-            return await Mediator.Send(new Counter.Command { });
+            return await Mediator.Send(new Count.Command { });
         }
     }
 }

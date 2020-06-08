@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Grid,
   Card,
@@ -12,17 +12,37 @@ import {
   Segment,
   SegmentGroup,
 } from "semantic-ui-react";
-import { NavLink } from "react-router-dom";
-export const JobCard = () => {
+import { NavLink, RouteComponentProps } from "react-router-dom";
+import { JobStore } from "../../../App/Store/jobsStore";
+import { observer } from "mobx-react-lite";
+import { IJobResult, IListSearchResult } from "../../../App/Models/Models";
+import { formatDistance, parseISO } from "date-fns";
+
+const JobCard: React.FC<{ job: IJobResult }> = ({ job }) => {
+  if (job === undefined)
+    return (
+      <Card fluid style={{ borderTop: "3px rgb(33, 138, 174) solid" }}>
+        <Card.Content>
+          <Header>
+            Sorry, the job you're looking for is no longer being advertised.
+            However, you can still search for similar jobs.
+          </Header>
+        </Card.Content>
+      </Card>
+    );
   return (
     <CardGroup>
       <Card fluid style={{ borderTop: "3px rgb(33, 138, 174) solid" }}>
         <Card.Content>
           <Header as="h1" style={{ marginBottom: "0px" }}>
-            Job Title Placeholder
+            {job?.jobTitle}
           </Header>
           <Card.Meta style={{ font: "6" }}>
-            Posted /dateplaceholder/ by /Company ph/
+            Posted{" "}
+            {formatDistance(parseISO(job?.datePosted!.toString()), new Date(), {
+              addSuffix: true,
+            })}{" "}
+            by {job?.employerName}
           </Card.Meta>
           <Grid>
             <GridColumn width="12">
@@ -39,7 +59,10 @@ export const JobCard = () => {
                               <Icon.Group size="small">
                                 <Icon name="pound sign" />
                               </Icon.Group>
-                              Salary ph
+                              {job?.yearlyMinimumSalary === 0
+                                ? "Depending on experiece"
+                                : `${job?.yearlyMinimumSalary} to
+                            ${job?.yearlyMaximumSalary}`}
                             </Header>
                           </GridRow>
                         </GridColumn>
@@ -48,7 +71,7 @@ export const JobCard = () => {
                             <Icon.Group size="small">
                               <Icon name="location arrow" />
                             </Icon.Group>
-                            Location ph
+                            {job?.locationName}
                           </Header>
                         </GridColumn>
                       </GridRow>
@@ -58,60 +81,32 @@ export const JobCard = () => {
                             <Icon.Group size="small">
                               <Icon name="clock outline" />
                             </Icon.Group>
-                            Job type ph
+                            {job?.contractType}
                           </Header>
                         </GridColumn>
-                        <GridColumn width="8">
-                          <Header as="h5">
-                            <Icon.Group size="small">
-                              <Icon name="universal access" />
-                            </Icon.Group>
-                            Be one of the first ten applicants
-                          </Header>
-                        </GridColumn>
+                        {job?.applications! < 10 ? (
+                          <GridColumn width="8">
+                            <Header as="h5">
+                              <Icon.Group size="small">
+                                <Icon name="universal access" />
+                              </Icon.Group>
+                              {"Be one of the first ten applicants"}
+                            </Header>
+                          </GridColumn>
+                        ) : (
+                          ""
+                        )}
                       </GridRow>
                     </Grid>
                   </Segment>
                 </Card.Description>
                 <br />
                 <Card.Description>
-                  JOB TITLE - Reception Teacher, Enfield, September 2020 ABOUT
-                  THE SCHOOL Prospero Teaching is looking for a Reception
-                  Teacher for an Ofsted "Good" Primary school in Enfield, North
-                  London. The school is a vibrant two-form entry mainstream
-                  Primary School with a supportive senior leadership team. The
-                  school is going from strength to strength and providing
-                  training to all staff. The position is open to both NQT's and
-                  experienced teachers. Depending on performance the school
-                  would look at either extending the contract or offering a
-                  permanent position. CONTRACT/POSITION DETAILS Location -
-                  Enfield, North London Position - Nursery Teacher Type of work
-                  - Class Teacher - planning, preparation, marking, parents
-                  evenings etc Contract or position start date - 3rd September
-                  2020 Duration / Likely Duration - 2 terms until end of the
-                  academic year July 2021 Contract or position end date (if
-                  applicable) - July 2021 Contract type (temp/perm/temp to perm)
-                  - Temporary, long term Full time/part time - Full time Minimum
-                  rate of pay - Minimum rate £130 per day / paid to scale Hours
-                  - 8:30 am - 4pm : Mon - Fri (term time only) EXPERIENCE,
-                  TRAINING AND QUALIFICATIONS QTS or equivalent Minimum 1 year
-                  Key Stage 2 teaching experience in the UK Up to date
-                  Safeguarding training issued in the last year TO BE ELIGIBLE
-                  FOR THIS ROLE THROUGH PROSPERO TEACHING, YOU MUST: Hold Right
-                  to Work in the UK Hold an enhanced child barred list DBS
-                  certificate registered with the online update service or be
-                  willing to process a new application Provide two professional
-                  child related references OTHER If you would like to be
-                  considered for this role, please apply with a copy of your up
-                  to date CV. Unfortunately, only shortlisted candidates will be
-                  contacted. Prospero Teaching is acting as an employment
-                  business/education recruitment agency in relation to this
-                  vacancy. The successful candidate will be required to register
-                  with Prospero Teaching in order to fill this vacancy. Prospero
-                  Teaching is able to offer the successful candidate: Free,
-                  accredited continued professional development courses
-                  including safeguarding and behaviour management In-house
-                  Training and Development Team
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: job?.jobDescription!,
+                    }}
+                  />
                 </Card.Description>
               </GridRow>
             </GridColumn>
@@ -138,11 +133,11 @@ export const JobCard = () => {
                   basic
                   size="small"
                 >
-                  <Header icon="browser" content="Cookies policy" />
+                  <Header icon="browser" content="Success!" />
                   <Modal.Content>
                     <h3>
                       Congratulations! Your application is now being redirected
-                      to /Company ph/!
+                      to {job?.employerName}!
                     </h3>
                   </Modal.Content>
                   <Modal.Actions>
@@ -196,3 +191,4 @@ export const JobCard = () => {
     </CardGroup>
   );
 };
+export default observer(JobCard);

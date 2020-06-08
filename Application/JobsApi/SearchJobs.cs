@@ -13,12 +13,12 @@ namespace Application.JobsApi
 {
     public class SearchJob
     {
-        public class Query : MediatR.IRequest<List<JobModel>>
+        public class Query : MediatR.IRequest<ListJobs>
         {
             public QueryRequest Request { get; set; }
 
         }
-        public class Handler : IRequestHandler<Query, List<JobModel>>
+        public class Handler : IRequestHandler<Query, ListJobs>
         {
             private readonly IJobBatchProcess _config;
 
@@ -28,9 +28,9 @@ namespace Application.JobsApi
             }
 
 
-            public Task<List<JobModel>> Handle(Query request, CancellationToken cancellationToken)
+            public Task<ListJobs> Handle(Query request, CancellationToken cancellationToken)
             {
-                var descriptor = new SearchDescriptor<JobModel>().Take(100);
+                var descriptor = new SearchDescriptor<JobModel>().Take(20);
                 var queryBuilder = new QueryBuilder();
 
 
@@ -46,9 +46,12 @@ namespace Application.JobsApi
                 var boolQuery = queryBuilder.Build();
 
                 var queryResult = _config.ElClient().Search<JobModel>(descriptor.Query(q => boolQuery));
-
-                return Task.FromResult<List<JobModel>>(queryResult.Documents.ToList());
-
+                var result = queryResult.Documents.ToList();
+                return Task.FromResult(new ListJobs
+                {
+                    Lists = result,
+                    Count = result.Count()
+                });
             }
         }
     }

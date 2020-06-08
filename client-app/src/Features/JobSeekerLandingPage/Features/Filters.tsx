@@ -14,7 +14,7 @@ import { NavLink } from "react-router-dom";
 export const Filters = () => {
   return (
     <Container>
-      <SegmentGroup fluid>
+      <SegmentGroup>
         <Segment>
           <Header content="Filter your search" size="medium" />
         </Segment>

@@ -2,7 +2,8 @@ import React from "react";
 import { SearchBar } from "./Features/SearchBar";
 import { Segment, Divider } from "semantic-ui-react";
 import { FiltersAndCards } from "./Features/FiltersAndCards";
-export const SearchResults = () => {
+import { withRouter } from "react-router-dom";
+const SearchResults = () => {
   return (
     <Segment>
       <SearchBar />
@@ -11,3 +12,4 @@ export const SearchResults = () => {
     </Segment>
   );
 };
+export default SearchResults;

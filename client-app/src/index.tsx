@@ -16,9 +16,7 @@ export const history = createBrowserHistory();
 
 ReactDOM.render(
   <Router history={history}>
-    <ScrollToTop>
-      <App />
-    </ScrollToTop>
+    <App />
   </Router>,
 
   document.getElementById("root")
