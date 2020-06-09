@@ -19,7 +19,7 @@ const DetailedView: React.FC<RouteComponentProps<DetailParams>> = ({
   useEffect(() => {
     let id = parseInt(match.params.id);
     loadJob(id);
-  }, [match.params.id, history, job]);
+  }, [match.params.id, history]);
   console.log(job);
   console.log("job should be above -----------------------------");
   return (

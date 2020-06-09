@@ -4,7 +4,7 @@ namespace Application.ElasticSearch
 {
     public static class Mapping
     {
-        public static JobModel Job(JobModelApi job)
+        public static JobModel Job(JobModelApi job, int applications)
         {
             return new JobModel
             {
@@ -26,7 +26,7 @@ namespace Application.ElasticSearch
                 FullTime = job.FullTime,
                 ContractType = job.ContractType,
                 JobDescription = job.JobDescription,
-                Applications = job.Applications
+                Applications = applications
             };
         }
     }
