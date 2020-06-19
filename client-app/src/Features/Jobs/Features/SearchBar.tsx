@@ -10,20 +10,17 @@ import {
   GridColumn,
 } from "semantic-ui-react";
 import { JobStore } from "../../../App/Store/jobsStore";
-import { LoadingComponent } from "../../../App/Layout/LoadingComponent";
 import { IQueryRequest } from "../../../App/Models/Models";
 import { Form as FinalForm, Field } from "react-final-form";
-import { Route, Link, NavLink } from "react-router-dom";
-import SearchResults from "../../JobSeekerLandingPage/SearchResults";
+import { Link } from "react-router-dom";
+import { toJS } from "mobx";
 
 const SearchBar = () => {
   const jobsStore = useContext(JobStore);
-  const { jobsCounter, counter, query, getListJobs } = jobsStore;
-  const onSubmit = async (data: IQueryRequest) => {
-    await getListJobs(data);
-    history.push("/jobs/results");
+  const { jobsCounter, counter, setSearchParams, query } = jobsStore;
+  const onSubmit = async (query: IQueryRequest) => {
+    await setSearchParams(query);
   };
-
   useEffect(() => {
     jobsCounter();
   }, [jobsCounter]);
@@ -77,7 +74,9 @@ const SearchBar = () => {
                     />
                   </Form.Field>
                   <Form.Field>
-                    <Button primary>Search</Button>
+                    <Button primary as={Link} to="jobs/results">
+                      Search
+                    </Button>
                   </Form.Field>
                 </Form.Group>
               </Form>

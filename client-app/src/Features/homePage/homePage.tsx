@@ -1,6 +1,6 @@
 import React from "react";
 import { NavBar } from "../nav/NavBar";
-import { Jobs } from "../Jobs/Jobs";
+import Jobs from "../Jobs/Jobs";
 import { Container } from "semantic-ui-react";
 //import { JobStore } from "../../App/Store/jobsStore";
 //import { LoadingComponent } from "../../App/Layout/LoadingComponent";

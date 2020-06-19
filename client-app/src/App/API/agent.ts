@@ -32,7 +32,7 @@ const sleep = (ms: number) => (response: AxiosResponse) =>
   );
 
 const requests = {
-  get: (url: string) => axios.get(url).then(responseBody),
+  get: (url: string) => axios.get(url).then(sleep(50)).then(responseBody),
   getForm: (url: string, body: {}) => axios.post(url, body).then(responseBody),
   post: (url: string, body: {}) =>
     axios.post(url, body).then(sleep(10)).then(responseBody),

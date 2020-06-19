@@ -1,30 +1,47 @@
-import { observable, action, runInAction, configure, toJS } from "mobx";
+import {
+  observable,
+  action,
+  runInAction,
+  configure,
+  toJS,
+  computed,
+} from "mobx";
 import {
   ICounter,
   IQueryRequest,
-  IListSearchResult,
   IJobResult,
+  IListSearchResult,
 } from "../Models/Models";
 import agent from "../API/agent";
 import { createContext } from "react";
+import { history } from "../../index";
 
 configure({ enforceActions: "always" });
 
 export class JobsStore {
   @observable counter: ICounter | undefined;
+  @observable resultCount?: number;
   @observable counterRegistry = new Map();
+  @observable queryRegistry = new Map();
   @observable loadingInitial = false;
   @observable addedToday: number | undefined;
   @observable jobs?: IListSearchResult;
   @observable jobsRegistry = new Map();
   @observable jobRegistry = new Map();
   @observable appLoaded = false;
-  @observable query: IQueryRequest | undefined;
+  @observable query?: IQueryRequest;
   @observable job?: IJobResult;
   @observable jobresult?: IJobResult;
 
-  @action setAppLoaded = () => {
-    this.appLoaded = true;
+  @action setSearchParams = async (data: IQueryRequest) => {
+    try {
+      runInAction("loading counter", () => {
+        this.query = data;
+      });
+      return this.query;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   @action jobsCounter = async () => {
@@ -40,44 +57,39 @@ export class JobsStore {
     }
   };
 
-  @action setJobs = (params: IListSearchResult) => {
-    try {
-      runInAction("set to object", () => {
-        sessionStorage.list = JSON.stringify(params);
-      });
-      console.log(JSON.parse(sessionStorage.list));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  @action getJobs = () => {
-    const result: IListSearchResult = JSON.parse(sessionStorage.list);
-    return result;
-  };
-
   @action loadJob = async (id: number) => {
+    this.loadingInitial = true;
     try {
       let job = await agent.detailedJob(id);
       runInAction("load job", () => {
         this.job = job;
         this.jobRegistry.set(job, this.job);
+        this.loadingInitial = false;
       });
       return job;
     } catch (error) {
+      this.loadingInitial = false;
+
       console.log(error);
     }
   };
 
   @action getListJobs = async (params: IQueryRequest) => {
+    this.loadingInitial = true;
     try {
-      const jobs = await agent.listJobs(params);
+      let jobs = await agent.listJobs(params);
       runInAction("get list", () => {
         this.jobs = jobs;
-        this.jobsRegistry.set(this.jobs, jobs);
-        this.setJobs(this.jobs);
+        this.jobsRegistry.set(jobs, this.jobs);
+        this.loadingInitial = false;
       });
+
+      return jobs;
     } catch (error) {
-      console.log(error);
+      runInAction("load jobs error", () => {
+        console.log(error);
+        this.loadingInitial = false;
+      });
     }
   };
 }

@@ -1,15 +1,29 @@
-import React from "react";
-import { SearchBar } from "./Features/SearchBar";
+import React, { useContext, useEffect } from "react";
+import SearchBar from "./Features/SearchBar";
 import { Segment, Divider } from "semantic-ui-react";
-import { FiltersAndCards } from "./Features/FiltersAndCards";
-import { withRouter } from "react-router-dom";
+import FiltersAndCards from "./Features/FiltersAndCards";
+import { JobStore } from "../../App/Store/jobsStore";
+import { LoadingComponent } from "../../App/Layout/LoadingComponent";
+import { observer } from "mobx-react-lite";
+import { IQueryRequest } from "../../App/Models/Models";
+import { withRouter, useParams } from "react-router-dom";
+
 const SearchResults = () => {
+  const jobsStore = useContext(JobStore);
+  const { loadingInitial, jobs, setSearchParams, getListJobs } = jobsStore;
+  let query: IQueryRequest;
+
+  useEffect(() => {
+    getListJobs(query);
+  }, []);
+  if (loadingInitial)
+    return <LoadingComponent content="Getting job results..." />;
   return (
     <Segment>
       <SearchBar />
       <Divider section />
-      <FiltersAndCards />
+      <FiltersAndCards jobs={jobs!} />
     </Segment>
   );
 };
-export default SearchResults;
+export default withRouter(observer(SearchResults));

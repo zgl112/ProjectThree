@@ -6,8 +6,9 @@ import { DisplayJobsCard } from "./Features/DisplayJobsCard";
 import { Sectors } from "./Features/Sectors";
 import { Locations } from "./Features/Locations";
 import { Courses } from "./Features/Courses";
+import { observer } from "mobx-react-lite";
 
-export const Jobs = () => {
+const Jobs = () => {
   return (
     <Segment
       style={{
@@ -29,3 +30,4 @@ export const Jobs = () => {
     </Segment>
   );
 };
+export default observer(Jobs);

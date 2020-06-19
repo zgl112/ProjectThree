@@ -3,14 +3,13 @@ import { Container, Form, Button } from "semantic-ui-react";
 import { Form as FinalForm, Field } from "react-final-form";
 import { JobStore } from "../../../App/Store/jobsStore";
 import { IQueryRequest } from "../../../App/Models/Models";
-import { history } from "../../..";
+import { observer } from "mobx-react-lite";
 
-export const SearchBar = () => {
+const SearchBar = () => {
   const jobsStore = useContext(JobStore);
-  const { jobsCounter, counter, query, getListJobs } = jobsStore;
+  const { counter, query, getListJobs } = jobsStore;
   const onSubmit = async (data: IQueryRequest) => {
     await getListJobs(data);
-    history.push("/jobs/results");
   };
   return (
     <Container style={{ width: "100%" }}>
@@ -45,3 +44,4 @@ export const SearchBar = () => {
     </Container>
   );
 };
+export default observer(SearchBar);

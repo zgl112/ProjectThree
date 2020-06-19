@@ -12,10 +12,9 @@ import {
   Segment,
   SegmentGroup,
 } from "semantic-ui-react";
-import { NavLink, RouteComponentProps } from "react-router-dom";
-import { JobStore } from "../../../App/Store/jobsStore";
+import { NavLink } from "react-router-dom";
 import { observer } from "mobx-react-lite";
-import { IJobResult, IListSearchResult } from "../../../App/Models/Models";
+import { IJobResult } from "../../../App/Models/Models";
 import { formatDistance, parseISO } from "date-fns";
 
 const JobCard: React.FC<{ job: IJobResult }> = ({ job }) => {

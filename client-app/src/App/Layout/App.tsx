@@ -5,7 +5,7 @@ import { NavBar } from "../../Features/nav/NavBar";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { Homepage } from "../../Features/Homepage/Homepage";
-import { Jobs } from "../../Features/Jobs/Jobs";
+import Jobs from "../../Features/Jobs/Jobs";
 import { Courses } from "../../Features/Courses/Courses";
 import { CareerAdvice } from "../../Features/CareerAdvice/CareerAdvice";
 import { Recruiting } from "../../Features/Recruiting/Recruiting";
@@ -37,7 +37,8 @@ const App = () => {
                 <Switch>
                   <Route exact path="/" component={Homepage} />
                   <Route exact path="/jobs" component={Jobs} />
-                  <Route path="/jobs/results" component={SearchResults} />
+                  <Route path="/jobs/results/" component={SearchResults} />
+                  <Route path="/jobs/results/:slug" component={SearchResults} />
                   <Route exact path="/courses" component={Courses} />
                   <Route
                     exact

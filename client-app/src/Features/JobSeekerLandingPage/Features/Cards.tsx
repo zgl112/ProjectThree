@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import {
   Card,
   Icon,
@@ -10,27 +10,29 @@ import {
   Header,
   Button,
   Modal,
+  Container,
 } from "semantic-ui-react";
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { IListSearchResult } from "../../../App/Models/Models";
 import { observer } from "mobx-react-lite";
-import { JobStore } from "../../../App/Store/jobsStore";
 import Dotdotdot from "react-dotdotdot";
 import { formatDistance, parseISO } from "date-fns";
-interface IProps {
-  results?: IListSearchResult;
-}
-const Cards: React.FC<IProps> = ({ results }) => {
-  const jobsStore = useContext(JobStore);
-  const { getJobs } = jobsStore;
 
-  const jobs = getJobs();
-  results = jobs;
-
-  const onclick = async (id: number) => {};
+const Cards: React.FC<{ jobs: IListSearchResult }> = ({ jobs }) => {
+  if (jobs?.count === 0)
+    return (
+      <CardGroup>
+        <Container>
+          <Header>
+            We cannot find any jobs with your search parameters. Please try
+            again later or change the location and job title!
+          </Header>
+        </Container>
+      </CardGroup>
+    );
   return (
     <CardGroup>
-      {results?.lists.map((job, index) => (
+      {jobs?.lists.map((job, index) => (
         <Card key={index} fluid>
           <Card.Content>
             <Grid>
