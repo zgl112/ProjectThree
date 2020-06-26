@@ -7,15 +7,17 @@ import { LoadingComponent } from "../../App/Layout/LoadingComponent";
 import { observer } from "mobx-react-lite";
 import { IQueryRequest } from "../../App/Models/Models";
 import { withRouter, useParams } from "react-router-dom";
-
+import { toJS } from "mobx";
 const SearchResults = () => {
   const jobsStore = useContext(JobStore);
-  const { loadingInitial, jobs, setSearchParams, getListJobs } = jobsStore;
-  let query: IQueryRequest;
+  const { loadingInitial, jobs, getListJobs, getQuery } = jobsStore;
 
   useEffect(() => {
-    getListJobs(query);
+    const query = getQuery();
+
+    getListJobs(query!);
   }, []);
+  console.log(toJS(getQuery()));
   if (loadingInitial)
     return <LoadingComponent content="Getting job results..." />;
   return (

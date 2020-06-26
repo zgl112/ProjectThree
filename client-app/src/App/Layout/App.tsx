@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import NotFound from "./NotFound";
 import { Container } from "semantic-ui-react";
 import { NavBar } from "../../Features/nav/NavBar";
-import { Route, Switch, BrowserRouter } from "react-router-dom";
+import { Route, Switch, withRouter, Router } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { Homepage } from "../../Features/Homepage/Homepage";
 import Jobs from "../../Features/Jobs/Jobs";
@@ -16,10 +16,11 @@ import { Footer } from "../../Features/Footer/Footer";
 import SearchResults from "../../Features/JobSeekerLandingPage/SearchResults";
 import DetailedView from "../../Features/JobSeekerLandingPage/DetailedView";
 import "mobx-react-lite/batchingForReactDom";
+import { history } from "../../index";
 const App = () => {
   return (
     <Fragment>
-      <BrowserRouter>
+      <Router history={history}>
         <ToastContainer position="bottom-right" />
         <Route exact path="/" component={Homepage} />
         <Route
@@ -38,7 +39,6 @@ const App = () => {
                   <Route exact path="/" component={Homepage} />
                   <Route exact path="/jobs" component={Jobs} />
                   <Route path="/jobs/results/" component={SearchResults} />
-                  <Route path="/jobs/results/:slug" component={SearchResults} />
                   <Route exact path="/courses" component={Courses} />
                   <Route
                     exact
@@ -65,9 +65,9 @@ const App = () => {
           )}
         />
         <Footer />
-      </BrowserRouter>
+      </Router>
     </Fragment>
   );
 };
 
-export default App;
+export default withRouter(App);

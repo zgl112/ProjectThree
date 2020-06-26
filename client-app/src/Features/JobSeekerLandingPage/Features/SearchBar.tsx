@@ -7,8 +7,9 @@ import { observer } from "mobx-react-lite";
 
 const SearchBar = () => {
   const jobsStore = useContext(JobStore);
-  const { counter, query, getListJobs } = jobsStore;
+  const { counter, query, getListJobs, setSearchParams } = jobsStore;
   const onSubmit = async (data: IQueryRequest) => {
+    await setSearchParams(data);
     await getListJobs(data);
   };
   return (

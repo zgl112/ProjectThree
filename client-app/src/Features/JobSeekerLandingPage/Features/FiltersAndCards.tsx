@@ -1,11 +1,13 @@
 import React from "react";
 import { Grid, GridColumn, Header, Container } from "semantic-ui-react";
-import { Filters } from "./Filters";
+import Filters from "./Filters";
 import Cards from "./Cards";
 import { IListSearchResult } from "../../../App/Models/Models";
 import { observer } from "mobx-react-lite";
 
-const FiltersAndCards: React.FC<{ jobs?: IListSearchResult }> = ({ jobs }) => {
+const FiltersAndCards: React.FC<{
+  jobs?: IListSearchResult;
+}> = ({ jobs }) => {
   return (
     <Container>
       <Header size="large">{`${jobs?.count} Jobs & Vacancies`}</Header>

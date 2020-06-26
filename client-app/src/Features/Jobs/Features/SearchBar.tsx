@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { observer } from "mobx-react-lite";
+import { Redirect, useHistory } from "react-router-dom";
 import { history } from "../../../index";
 import {
   Button,
@@ -12,9 +13,6 @@ import {
 import { JobStore } from "../../../App/Store/jobsStore";
 import { IQueryRequest } from "../../../App/Models/Models";
 import { Form as FinalForm, Field } from "react-final-form";
-import { Link } from "react-router-dom";
-import { toJS } from "mobx";
-
 const SearchBar = () => {
   const jobsStore = useContext(JobStore);
   const { jobsCounter, counter, setSearchParams, query } = jobsStore;
@@ -74,7 +72,8 @@ const SearchBar = () => {
                     />
                   </Form.Field>
                   <Form.Field>
-                    <Button primary as={Link} to="jobs/results">
+                    <Button primary>
+                      {/* primary as={Link} to="jobs/results" */}
                       Search
                     </Button>
                   </Form.Field>

@@ -13,11 +13,15 @@ import {
   IListSearchResult,
 } from "../Models/Models";
 import agent from "../API/agent";
-import { createContext } from "react";
 import { history } from "../../index";
+import { createContext } from "react";
+var ls = require("local-storage");
 
 configure({ enforceActions: "always" });
 
+const sleep = (milliseconds: number) => {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+};
 export class JobsStore {
   @observable counter: ICounter | undefined;
   @observable resultCount?: number;
@@ -35,8 +39,59 @@ export class JobsStore {
 
   @action setSearchParams = async (data: IQueryRequest) => {
     try {
-      runInAction("loading counter", () => {
+      runInAction("loading query", () => {
+        if (ls.get("data") !== null) {
+          ls.remove("data");
+          ls.clear();
+          ls.set("data", data);
+        } else {
+          ls.set("data", data);
+        }
+
         this.query = data;
+        history.push("/jobs/results");
+      });
+      return this.query;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  @action combineQuery = async (data: IQueryRequest) => {
+    const oldQuery: IQueryRequest = await ls.get("data");
+    try {
+      runInAction("loading query", () => {
+        if (data.minimumSalary !== null) {
+          oldQuery.minimumSalary = data.minimumSalary;
+        }
+        if (data.maximumSalary !== null) {
+          oldQuery.maximumSalary = data.maximumSalary;
+        }
+        if (data.fullTime !== null) {
+          oldQuery.fullTime = data.fullTime;
+        }
+        if (data.partTime !== null) {
+          oldQuery.partTime = data.partTime;
+        }
+        if (data.contract !== null) {
+          oldQuery.contract = data.contract;
+        }
+        if (data.date !== null) {
+          oldQuery.date = data.date;
+        }
+        ls.set("data", oldQuery);
+        this.getListJobs(oldQuery!);
+      });
+      return this.jobs;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  @action getQuery = () => {
+    try {
+      runInAction("loading counter", () => {
+        this.query = ls.get("data");
       });
       return this.query;
     } catch (error) {
