@@ -30,7 +30,7 @@ namespace Application.JobsApi
 
             public Task<ListJobs> Handle(Query request, CancellationToken cancellationToken)
             {
-                var descriptor = new SearchDescriptor<JobModel>().Take(20);
+                var descriptor = new SearchDescriptor<JobModel>().Take(10000);
                 var queryBuilder = new QueryBuilder();
 
 
@@ -47,10 +47,12 @@ namespace Application.JobsApi
 
                 var queryResult = _config.ElClient().Search<JobModel>(descriptor.Query(q => boolQuery));
                 var result = queryResult.Documents.ToList();
+                var counters = _config.GetGeneral(result);
                 return Task.FromResult(new ListJobs
                 {
                     Lists = result,
-                    Count = result.Count()
+                    Count = result.Count(),
+                    Counters = counters
                 });
             }
         }

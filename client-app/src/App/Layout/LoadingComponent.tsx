@@ -6,7 +6,14 @@ export const LoadingComponent: React.FC<{
   content?: string;
 }> = ({ inverted = true, content }) => {
   return (
-    <Dimmer active inverted={inverted}>
+    <Dimmer
+      active
+      inverted
+      style={{
+        backgroundColor: "rgb(245, 247, 250)",
+        boxShadow: "none",
+      }}
+    >
       <Loader content={content} />
     </Dimmer>
   );

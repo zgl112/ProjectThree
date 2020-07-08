@@ -14,22 +14,38 @@ const DetailedView: React.FC<RouteComponentProps<DetailParams>> = ({
   match,
   history,
 }) => {
-  const jobsStore = useContext(JobStore);
-  const { loadJob, job, loadingInitial } = jobsStore;
+  // const jobsStore = useContext(JobStore);
+  // const { loadJob, job, loadingInitial } = jobsStore;
 
   useEffect(() => {
     let id = parseInt(match.params.id);
     loadJob(id);
   }, [match.params.id, history]);
 
+  const jobsStore = useContext(JobStore);
+  const {
+    loadingInitial,
+    jobs,
+    getListJobs,
+    getQuery,
+    loadJob,
+    job,
+  } = jobsStore;
+
+  useEffect(() => {
+    const query = getQuery();
+
+    getListJobs(query!);
+  }, []);
+
   if (loadingInitial)
     return <LoadingComponent content="Getting job details..." />;
 
   return (
-    <Segment>
+    <Segment style={{ backgroundColor: "#f5f7fa" }}>
       <SearchBar />
       <Divider section />
-      <JobDetails job={job!} />
+      <JobDetails job={job!} jobs={jobs!} />
     </Segment>
   );
 };

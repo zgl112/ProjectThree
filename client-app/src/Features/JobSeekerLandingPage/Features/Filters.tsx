@@ -12,14 +12,16 @@ import { salaryOptions, timeAdded } from "../../../App/Util/FilterOptions";
 import { NavLink } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { Form as FinalForm } from "react-final-form";
-import { IQueryRequest } from "../../../App/Models/Models";
+import { IQueryRequest, ICounters } from "../../../App/Models/Models";
 import { JobStore } from "../../../App/Store/jobsStore";
+import { toJS } from "mobx";
 
-const Filters = () => {
+const Filters: React.FC<{ counters: ICounters }> = ({ counters }) => {
   const jobsStore = useContext(JobStore);
   const { combineQuery } = jobsStore;
   const onSubmit = async () => {
     await combineQuery(queryX!);
+    console.log(queryX);
   };
   const returnValue = (text: string) => {
     let result;
@@ -42,268 +44,307 @@ const Filters = () => {
   };
 
   const [queryX, setQuery] = React.useState<IQueryRequest>();
-
+  const [show, toggleShow] = React.useState(false);
+  const setTrue = () => {
+    toggleShow(true);
+  };
+  console.log(toJS(counters));
   return (
     <Container>
       <FinalForm
         onSubmit={onSubmit}
         render={({ handleSubmit }) => (
-          <Form onClick={handleSubmit}>
-            <Form.Group>
-              <SegmentGroup>
-                <Segment>
-                  <Header content="Filter your search" size="medium" />
-                </Segment>
+          <Form onSubmit={handleSubmit}>
+            <SegmentGroup>
+              <Segment>
+                <Header content="Filter your search" size="medium" />
+              </Segment>
 
+              {show && (
                 <Segment>
-                  <label>From :</label>
-                  <Form.Field>
-                    <Form.Select
-                      onChange={(e: SyntheticEvent<HTMLElement, Event>) =>
-                        setQuery({
-                          ...queryX!,
-                          minimumSalary: returnValue(e.currentTarget.innerText),
-                        })
-                      }
-                      placeholder="£Any"
-                      fluid
-                      selection
-                      options={salaryOptions}
-                      value={queryX?.minimumSalary}
-                    ></Form.Select>
-                  </Form.Field>
+                  <Button
+                    fluid
+                    style={{ backgroundColor: "#2185d0", color: "#fff" }}
+                    animated="fade"
+                  >
+                    <Button.Content visible>Update</Button.Content>
+                    <Button.Content hidden>Search</Button.Content>
+                  </Button>
+                </Segment>
+              )}
 
-                  <label>To :</label>
-                  <br />
-                  <Form.Field>
-                    <Form.Select
-                      onChange={(e: SyntheticEvent<HTMLElement, Event>) =>
-                        setQuery({
-                          ...queryX!,
-                          maximumSalary: returnValue(e.currentTarget.innerText),
-                        })
-                      }
-                      placeholder="£Any"
-                      fluid
-                      selection
-                      options={salaryOptions}
-                      name="maximumSalary"
-                      value={queryX?.maximumSalary}
-                    ></Form.Select>
-                  </Form.Field>
-                </Segment>
-                <Segment>
-                  <Header content="Job Type :" size="tiny" />
-                  <Form.Field>
-                    <Form.Group>
-                      <Form.Field>
-                        <Form.Radio
-                          label="Permanent"
-                          value="permanent"
-                          checked={queryX?.contract === "permanent"}
-                          onChange={(e: SyntheticEvent<HTMLElement, Event>) =>
-                            setQuery({
-                              ...queryX!,
-                              contract: e.currentTarget.innerText.toLowerCase(),
-                            })
-                          }
-                        />
-                        <Form.Radio
-                          label="Temporary"
-                          value="temporary"
-                          checked={queryX?.contract === "temporary"}
-                          onChange={(e: SyntheticEvent<HTMLElement, Event>) =>
-                            setQuery({
-                              ...queryX!,
-                              contract: e.currentTarget.innerText.toLowerCase(),
-                            })
-                          }
-                        />
-                        <Form.Radio
-                          label="Contract"
-                          value="contract"
-                          checked={queryX?.contract === "contract"}
-                          onChange={(e: SyntheticEvent<HTMLElement, Event>) =>
-                            setQuery({
-                              ...queryX!,
-                              contract: e.currentTarget.innerText.toLowerCase(),
-                            })
-                          }
-                        />
-                      </Form.Field>
-                    </Form.Group>
-                    <Form.Group>
-                      <Form.Field>
-                        <Form.Radio
-                          onChange={(
-                            e: SyntheticEvent<HTMLElement, Event>,
-                            data: any
-                          ) =>
-                            setQuery({
-                              ...queryX!,
-                              fullTime: data.checked,
-                            })
-                          }
-                          label="Full-time"
-                          checked={queryX?.fullTime === true}
-                          name="fullTime"
-                        />{" "}
-                      </Form.Field>
-                    </Form.Group>
-                    <Form.Group>
-                      <Form.Field>
-                        <Form.Radio
-                          onChange={(
-                            e: SyntheticEvent<HTMLElement, Event>,
-                            data: any
-                          ) =>
-                            setQuery({
-                              ...queryX!,
-                              fullTime: data.checked,
-                            })
-                          }
-                          label="Part-time"
-                          checked={queryX?.partTime === true}
-                          name="partTime"
-                        />{" "}
-                      </Form.Field>
-                    </Form.Group>
-                  </Form.Field>
-                </Segment>
-                <Segment>
-                  <Form.Field>
-                    <Header content="Date posted :" size="tiny" />
-                    <Form.Select
-                      onChange={(e: SyntheticEvent<HTMLElement, Event>) =>
-                        setQuery({
-                          ...queryX!,
-                          date: returnDateValue(e.currentTarget.innerText),
-                        })
-                      }
-                      placeholder="Anytime"
-                      fluid
-                      selection
-                      options={timeAdded}
-                      name="minimumSalary"
-                    ></Form.Select>
-                  </Form.Field>
-                </Segment>
+              <Segment>
+                <label>From :</label>
+                <Form.Field>
+                  <Form.Select
+                    onChange={(e: SyntheticEvent<HTMLElement, Event>) =>
+                      setQuery({
+                        ...queryX!,
+                        minimumSalary: returnValue(e.currentTarget.innerText),
+                      })
+                    }
+                    placeholder="£Any"
+                    onClick={setTrue}
+                    fluid
+                    selection
+                    options={salaryOptions}
+                    value={queryX?.minimumSalary}
+                  ></Form.Select>
+                </Form.Field>
 
-                <Segment>
-                  <Header content="Specialisms" size="tiny" />
-                  <Segment style={{ height: "220px", overflowY: "scroll" }}>
-                    <Checkbox
-                      style={{ marginBottom: "9px" }}
-                      label="Permanent(26.431)"
-                    />
-                    <Checkbox
-                      style={{ marginBottom: "9px" }}
-                      label="Temporary(15.321)"
-                    />
-                    <Checkbox
-                      style={{ marginBottom: "9px" }}
-                      label="Contract(54.123)"
-                    />
-                    <Checkbox
-                      style={{ marginBottom: "9px" }}
-                      label="Full-time(15.321)"
-                    />
-                    <Checkbox
-                      label="Part-time(15.321)"
-                      style={{ marginBottom: "5px" }}
-                    />
-                    <Checkbox
-                      style={{ marginBottom: "9px" }}
-                      label="Permanent(26.431)"
-                    />
-                    <Checkbox
-                      style={{ marginBottom: "9px" }}
-                      label="Temporary(15.321)"
-                    />
-                    <Checkbox
-                      style={{ marginBottom: "9px" }}
-                      label="Contract(54.123)"
-                    />
-                    <Checkbox
-                      style={{ marginBottom: "9px" }}
-                      label="Full-time(15.321)"
-                    />
-                    <Checkbox
-                      label="Part-time(15.321)"
-                      style={{ marginBottom: "5px" }}
-                    />
-                    <Checkbox
-                      style={{ marginBottom: "9px" }}
-                      label="Permanent(26.431)"
-                    />
-                    <Checkbox
-                      style={{ marginBottom: "9px" }}
-                      label="Temporary(15.321)"
-                    />
-                    <Checkbox
-                      style={{ marginBottom: "9px" }}
-                      label="Contract(54.123)"
-                    />
-                    <Checkbox
-                      style={{ marginBottom: "9px" }}
-                      label="Full-time(15.321)"
-                    />
-                    <Checkbox
-                      label="Part-time(15.321)"
-                      style={{ marginBottom: "5px" }}
-                    />
-                    <Checkbox
-                      style={{ marginBottom: "9px" }}
-                      label="Permanent(26.431)"
-                    />
-                    <Checkbox
-                      style={{ marginBottom: "9px" }}
-                      label="Temporary(15.321)"
-                    />
-                    <Checkbox
-                      style={{ marginBottom: "9px" }}
-                      label="Contract(54.123)"
-                    />
-                    <Checkbox
-                      style={{ marginBottom: "9px" }}
-                      label="Full-time(15.321)"
-                    />
-                    <Checkbox
-                      label="Part-time(15.321)"
-                      style={{ marginBottom: "5px" }}
-                    />
-                    <Checkbox
-                      style={{ marginBottom: "9px" }}
-                      label="Full-time(15.321)"
-                    />
-                  </Segment>
-                </Segment>
-                <Segment>
-                  <Header content="Posted by :" size="tiny" />
+                <label>To :</label>
+                <br />
+                <Form.Field>
+                  <Form.Select
+                    onChange={(e: SyntheticEvent<HTMLElement, Event>) =>
+                      setQuery({
+                        ...queryX!,
+                        maximumSalary: returnValue(e.currentTarget.innerText),
+                      })
+                    }
+                    placeholder="£Any"
+                    onClick={setTrue}
+                    fluid
+                    selection
+                    options={salaryOptions}
+                    name="maximumSalary"
+                    value={queryX?.maximumSalary}
+                  ></Form.Select>
+                </Form.Field>
+              </Segment>
+              <Segment>
+                <Header content="Job Type :" size="tiny" />
+                <Form.Group grouped>
+                  <Checkbox
+                    label={
+                      counters === undefined
+                        ? "Temporary"
+                        : `Temporary (${counters.temporary})`
+                    }
+                    value="temporary"
+                    onClick={setTrue}
+                    onChange={(e: SyntheticEvent<HTMLElement, Event>) =>
+                      setQuery({
+                        ...queryX!,
+                        contract: e.currentTarget.innerText
+                          .toLowerCase()
+                          .replace(` (${counters.temporary})`, ""),
+                      })
+                    }
+                  />
+                </Form.Group>
+                <Form.Group grouped>
+                  <Checkbox
+                    label={
+                      counters === undefined
+                        ? "Permanent"
+                        : `Permanent (${counters.permanent})`
+                    }
+                    value="permanent"
+                    onClick={setTrue}
+                    onChange={(e: SyntheticEvent<HTMLElement, Event>) =>
+                      setQuery({
+                        ...queryX!,
+                        contract: e.currentTarget.innerText
+                          .toLowerCase()
+                          .replace(` (${counters.permanent})`, ""),
+                      })
+                    }
+                  />
+                </Form.Group>
+                <Form.Group grouped>
+                  <Checkbox
+                    label={
+                      counters === undefined
+                        ? "Contract"
+                        : `Contract (${counters.contract})`
+                    }
+                    value="contract"
+                    onClick={setTrue}
+                    onChange={(e: SyntheticEvent<HTMLElement, Event>) =>
+                      setQuery({
+                        ...queryX!,
+                        contract: e.currentTarget.innerText
+                          .toLowerCase()
+                          .replace(` (${counters.contract})`, ""),
+                      })
+                    }
+                  />
+                </Form.Group>
+                <Form.Group grouped>
+                  <Checkbox
+                    onChange={(
+                      e: SyntheticEvent<HTMLElement, Event>,
+                      data: any
+                    ) =>
+                      setQuery({
+                        ...queryX!,
+                        fullTime: data.checked,
+                      })
+                    }
+                    label={
+                      counters === undefined
+                        ? "Full-time"
+                        : `Full-time (${counters.fullTime})`
+                    }
+                    onClick={setTrue}
+                    value={"true"}
+                    checked={queryX?.fullTime === true}
+                  />{" "}
+                </Form.Group>
+                <Form.Group grouped>
+                  <Checkbox
+                    onChange={(
+                      e: SyntheticEvent<HTMLElement, Event>,
+                      data: any
+                    ) =>
+                      setQuery({
+                        ...queryX!,
+                        partTime: data.checked,
+                      })
+                    }
+                    label={
+                      counters === undefined
+                        ? "Part-time"
+                        : `Part-time (${counters.partTime})`
+                    }
+                    onClick={setTrue}
+                    value={"true"}
+                    checked={queryX?.partTime === true}
+                  />{" "}
+                </Form.Group>
+              </Segment>
+              <Segment>
+                <Form.Field>
+                  <Header content="Date posted :" size="tiny" />
+                  <Form.Select
+                    onChange={(e: SyntheticEvent<HTMLElement, Event>) =>
+                      setQuery({
+                        ...queryX!,
+                        date: returnDateValue(e.currentTarget.innerText),
+                      })
+                    }
+                    placeholder="Anytime"
+                    fluid
+                    selection
+                    options={timeAdded}
+                    onClick={setTrue}
+                  ></Form.Select>
+                </Form.Field>
+              </Segment>
+
+              <Segment>
+                <Header content="Specialisms" size="tiny" />
+                <Segment style={{ height: "220px", overflowY: "scroll" }}>
                   <Checkbox
                     style={{ marginBottom: "9px" }}
-                    label="Agency(26.431)"
+                    label="Permanent(26.431)"
                   />
                   <Checkbox
                     style={{ marginBottom: "9px" }}
-                    label="Employer(15.321)"
+                    label="Temporary(15.321)"
                   />
                   <Checkbox
                     style={{ marginBottom: "9px" }}
-                    label="Reed(54.123)"
+                    label="Contract(54.123)"
                   />
-                </Segment>
-                <Segment>
-                  <Header content="More options :" size="tiny" />
                   <Checkbox
                     style={{ marginBottom: "9px" }}
-                    label="Suitable for graduates"
+                    label="Full-time(15.321)"
+                  />
+                  <Checkbox
+                    label="Part-time(15.321)"
+                    style={{ marginBottom: "5px" }}
+                  />
+                  <Checkbox
+                    style={{ marginBottom: "9px" }}
+                    label="Permanent(26.431)"
+                  />
+                  <Checkbox
+                    style={{ marginBottom: "9px" }}
+                    label="Temporary(15.321)"
+                  />
+                  <Checkbox
+                    style={{ marginBottom: "9px" }}
+                    label="Contract(54.123)"
+                  />
+                  <Checkbox
+                    style={{ marginBottom: "9px" }}
+                    label="Full-time(15.321)"
+                  />
+                  <Checkbox
+                    label="Part-time(15.321)"
+                    style={{ marginBottom: "5px" }}
+                  />
+                  <Checkbox
+                    style={{ marginBottom: "9px" }}
+                    label="Permanent(26.431)"
+                  />
+                  <Checkbox
+                    style={{ marginBottom: "9px" }}
+                    label="Temporary(15.321)"
+                  />
+                  <Checkbox
+                    style={{ marginBottom: "9px" }}
+                    label="Contract(54.123)"
+                  />
+                  <Checkbox
+                    style={{ marginBottom: "9px" }}
+                    label="Full-time(15.321)"
+                  />
+                  <Checkbox
+                    label="Part-time(15.321)"
+                    style={{ marginBottom: "5px" }}
+                  />
+                  <Checkbox
+                    style={{ marginBottom: "9px" }}
+                    label="Permanent(26.431)"
+                  />
+                  <Checkbox
+                    style={{ marginBottom: "9px" }}
+                    label="Temporary(15.321)"
+                  />
+                  <Checkbox
+                    style={{ marginBottom: "9px" }}
+                    label="Contract(54.123)"
+                  />
+                  <Checkbox
+                    style={{ marginBottom: "9px" }}
+                    label="Full-time(15.321)"
+                  />
+                  <Checkbox
+                    label="Part-time(15.321)"
+                    style={{ marginBottom: "5px" }}
+                  />
+                  <Checkbox
+                    style={{ marginBottom: "9px" }}
+                    label="Full-time(15.321)"
                   />
                 </Segment>
-              </SegmentGroup>
-
-              <Button>Search</Button>
-            </Form.Group>
+              </Segment>
+              <Segment>
+                <Header content="Posted by :" size="tiny" />
+                <Checkbox
+                  style={{ marginBottom: "9px" }}
+                  label="Agency(26.431)"
+                />
+                <Checkbox
+                  style={{ marginBottom: "9px" }}
+                  label="Employer(15.321)"
+                />
+                <Checkbox
+                  style={{ marginBottom: "9px" }}
+                  label="Reed(54.123)"
+                />
+              </Segment>
+              <Segment>
+                <Header content="More options :" size="tiny" />
+                <Checkbox
+                  style={{ marginBottom: "9px" }}
+                  label="Suitable for graduates"
+                />
+              </Segment>
+            </SegmentGroup>
           </Form>
         )}
       >

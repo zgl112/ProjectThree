@@ -13,12 +13,29 @@ import {
   Container,
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import { IListSearchResult } from "../../../App/Models/Models";
+import { IListSearchResult, IJobResult } from "../../../App/Models/Models";
 import { observer } from "mobx-react-lite";
 import Dotdotdot from "react-dotdotdot";
 import { formatDistance, parseISO } from "date-fns";
+import { LoadingComponent } from "../../../App/Layout/LoadingComponent";
+import { JobStore } from "../../../App/Store/jobsStore";
 
-const Cards: React.FC<{ jobs: IListSearchResult }> = ({ jobs }) => {
+const Cards: React.FC<{
+  jobs: IListSearchResult;
+  loadingInitial: boolean;
+  jobsPag: IJobResult[];
+}> = ({ jobs, loadingInitial, jobsPag }) => {
+  console.log(jobsPag);
+  if (loadingInitial)
+    return (
+      <CardGroup style={{ boxShadow: "none" }}>
+        <Card fluid style={{ height: "300px", boxShadow: "none" }}>
+          <Card.Description style={{ boxShadow: "none" }}>
+            <LoadingComponent content="Getting job results..." />
+          </Card.Description>
+        </Card>
+      </CardGroup>
+    );
   if (jobs?.count === 0)
     return (
       <CardGroup>
@@ -32,7 +49,7 @@ const Cards: React.FC<{ jobs: IListSearchResult }> = ({ jobs }) => {
     );
   return (
     <CardGroup>
-      {jobs?.lists.map((job, index) => (
+      {jobsPag?.map((job, index) => (
         <Card key={index} fluid>
           <Card.Content>
             <Grid>
@@ -90,7 +107,8 @@ const Cards: React.FC<{ jobs: IListSearchResult }> = ({ jobs }) => {
               style={{ marginTop: "-20px" }}
               floated="right"
               size="small"
-              src="./assets/placeholder.png"
+              alt="some image"
+              src={job.photos}
             />
 
             <Card.Header as={Link} to={`/jobs/result/${job.jobId}`}>
@@ -158,7 +176,6 @@ const Cards: React.FC<{ jobs: IListSearchResult }> = ({ jobs }) => {
               floated="right"
               as={Link}
               to={`/jobs/result/${job.jobId}`}
-              //  onClick={() => onclick(job.jobId!)}
               style={{
                 backgroundColor: "transparent",
                 border: "1px solid grey",
@@ -188,7 +205,7 @@ const Cards: React.FC<{ jobs: IListSearchResult }> = ({ jobs }) => {
                   wrapped
                   floated="right"
                   size="tiny"
-                  src="./assets/placeholder.png"
+                  src={job.photos}
                   style={{ marginTop: "-6px" }}
                 />
               </Modal.Header>
@@ -240,12 +257,7 @@ const Cards: React.FC<{ jobs: IListSearchResult }> = ({ jobs }) => {
                 </Modal.Description>
               </Modal.Content>
               <Modal.Actions>
-                <Button
-                  primary
-                  as={Link}
-                  //onClick={() => onclick(job.jobId!)}
-                  to={`/jobs/result/${job.jobId}`}
-                >
+                <Button primary as={Link} to={`/jobs/result/${job.jobId}`}>
                   Detailed view <Icon name="chevron right" />
                 </Button>
               </Modal.Actions>

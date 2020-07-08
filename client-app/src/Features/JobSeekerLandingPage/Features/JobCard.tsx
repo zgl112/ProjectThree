@@ -9,6 +9,7 @@ import {
   Modal,
   Button,
   CardGroup,
+  Image,
   Segment,
   SegmentGroup,
 } from "semantic-ui-react";
@@ -166,7 +167,7 @@ const JobCard: React.FC<{ job: IJobResult }> = ({ job }) => {
                     <Grid>
                       <GridRow as={NavLink} to="/jobs">
                         <p style={{ textAlign: "center", width: "100%" }}>
-                          Placeholder company
+                          {job.employerName}
                         </p>
                       </GridRow>
                     </Grid>

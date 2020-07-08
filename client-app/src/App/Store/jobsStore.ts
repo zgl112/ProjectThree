@@ -11,10 +11,12 @@ import {
   IQueryRequest,
   IJobResult,
   IListSearchResult,
+  ICounters,
 } from "../Models/Models";
 import agent from "../API/agent";
 import { history } from "../../index";
 import { createContext } from "react";
+import { imageSelector } from "../Util/FilterOptions";
 var ls = require("local-storage");
 
 configure({ enforceActions: "always" });
@@ -22,8 +24,10 @@ configure({ enforceActions: "always" });
 const sleep = (milliseconds: number) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
+
 export class JobsStore {
   @observable counter: ICounter | undefined;
+  @observable counters: ICounters | undefined;
   @observable resultCount?: number;
   @observable counterRegistry = new Map();
   @observable queryRegistry = new Map();
@@ -36,6 +40,21 @@ export class JobsStore {
   @observable query?: IQueryRequest;
   @observable job?: IJobResult;
   @observable jobresult?: IJobResult;
+  @observable jobsPag?: IJobResult[];
+
+  @action trendingQuery = async (data: string) => {
+    const oldQuery: IQueryRequest = await ls.get("data");
+    ls.remove("data");
+    ls.clear();
+    try {
+      runInAction("loading query", () => {
+        oldQuery.jobTitle = data;
+      });
+      return this.jobs;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   @action setSearchParams = async (data: IQueryRequest) => {
     try {
@@ -55,6 +74,20 @@ export class JobsStore {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  handlePhoto = () => {
+    const min = 0;
+    const max = 5;
+    const first = min + Math.random() * (max - min);
+    const rand = Math.round(first);
+    let result;
+    for (var i = 0; i < imageSelector.length; i++) {
+      if (imageSelector[i].key === rand) {
+        result = imageSelector[i].value;
+      }
+    }
+    return result;
   };
 
   @action combineQuery = async (data: IQueryRequest) => {
@@ -129,6 +162,31 @@ export class JobsStore {
     }
   };
 
+  @action addPhotoToJobs = async (jobs: IListSearchResult) => {
+    try {
+      runInAction("add images", () => {
+        jobs.lists.forEach((job) => {
+          job.photos = this.handlePhoto();
+        });
+      });
+    } catch (error) {
+      runInAction("load jobs error", () => {
+        console.log(error);
+      });
+    }
+  };
+
+  @action getCounters = (params: IListSearchResult) => {
+    try {
+      runInAction(() => {
+        this.counters = params.counters;
+      });
+      return this.counters;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   @action getListJobs = async (params: IQueryRequest) => {
     this.loadingInitial = true;
     try {
@@ -137,9 +195,11 @@ export class JobsStore {
         this.jobs = jobs;
         this.jobsRegistry.set(jobs, this.jobs);
         this.loadingInitial = false;
+        this.addPhotoToJobs(this.jobs);
+        this.getCounters(jobs!);
       });
 
-      return jobs;
+      return this.jobs;
     } catch (error) {
       runInAction("load jobs error", () => {
         console.log(error);

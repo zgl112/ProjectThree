@@ -6,5 +6,7 @@ namespace Domain
     {
         public int Count { get; set; }
         public List<JobModel> Lists { get; set; }
+
+        public GeneralCounters Counters { get; set; }
     }
 }

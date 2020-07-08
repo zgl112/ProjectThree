@@ -1,7 +1,7 @@
 import React from "react";
 import { Segment } from "semantic-ui-react";
 import SearchBar from "./Features/SearchBar";
-import { TrendingJob } from "./Features/TrendingJob";
+import TrendingJob from "./Features/TrendingJob";
 import { DisplayJobsCard } from "./Features/DisplayJobsCard";
 import { Sectors } from "./Features/Sectors";
 import { Locations } from "./Features/Locations";
