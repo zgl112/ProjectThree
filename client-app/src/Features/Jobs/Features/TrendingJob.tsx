@@ -1,7 +1,40 @@
-import React from "react";
+import React, {
+  SyntheticEvent,
+  useState,
+  useContext,
+  useCallback,
+} from "react";
 import { Container, Grid, List } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-export const TrendingJob = () => {
+import { IQueryRequest } from "../../../App/Models/Models";
+import { JobStore } from "../../../App/Store/jobsStore";
+import { observer } from "mobx-react-lite";
+import { sleep } from "../.././../App/API/agent";
+
+const TrendingJob = () => {
+  const [queryX, setQuery] = React.useState<IQueryRequest>();
+  const jobsStore = useContext(JobStore);
+  const { combineQuery, setSearchParams, getListJobs } = jobsStore;
+
+  const handleClick = async (
+    e: SyntheticEvent<HTMLElement, Event>,
+    data: any
+  ) => {
+    setQuery({
+      ...queryX!,
+      jobTitle: data.value,
+    });
+
+    if (queryX?.jobTitle === data.value) {
+      await setSearchParams(queryX!);
+    }
+  };
+
+  const trueValue = (data: string) => {
+    if (data === "true") return true;
+    else return false;
+  };
+
   return (
     <Container>
       <br /> <br />
@@ -14,33 +47,68 @@ export const TrendingJob = () => {
         <Grid.Row>
           <Grid.Column width={3}>
             <List link>
-              <List.Item as="a">NHS jobs</List.Item>
-              <List.Item as="a"> Immediate start jobs</List.Item>
-              <List.Item as="a">Supermarket jobs</List.Item>
-            </List>
-          </Grid.Column>
-          <Grid.Column width={3}>
-            <List link>
-              <List.Item>
-                {" "}
-                <Link to={`/`}>Delivery driver jobs</Link>
+              <List.Item as={Link} value="NHS" onClick={handleClick}>
+                NHS jobs
               </List.Item>
-              <List.Item as="a">Work from home jobs</List.Item>
-              <List.Item as="a">Part time jobs</List.Item>
+              <List.Item as={Link} value="immediate" onClick={handleClick}>
+                {" "}
+                Immediate start jobs
+              </List.Item>
+              <List.Item as={Link} value="supermarket" onClick={handleClick}>
+                Supermarket jobs
+              </List.Item>
             </List>
           </Grid.Column>
           <Grid.Column width={3}>
             <List link>
-              <List.Item as="a">Health and Medicine jobs</List.Item>
-              <List.Item as="a"> Emergency call handlers</List.Item>
-              <List.Item as="a">Farm jobs</List.Item>
+              <List.Item as={Link} value="delivery" onClick={handleClick}>
+                Delivery driver jobs
+              </List.Item>
+              <List.Item as={Link} value="work home" onClick={handleClick}>
+                Work from home jobs
+              </List.Item>
+              <List.Item
+                as={Link}
+                value="true"
+                onClick={(e: SyntheticEvent<HTMLElement, Event>, data: any) => {
+                  setQuery({
+                    ...queryX!,
+                    partTime: trueValue(data.value),
+                  });
+                  if (queryX?.partTime === trueValue(data.value)) {
+                    setSearchParams(queryX!);
+                  }
+                }}
+              >
+                Part time jobs
+              </List.Item>
             </List>
           </Grid.Column>
           <Grid.Column width={3}>
             <List link>
-              <List.Item as="a">Warehouse jobs</List.Item>
-              <List.Item as="a">Social care jobs</List.Item>
-              <List.Item as="a">Administration jobs</List.Item>
+              <List.Item as={Link} value="medicine" onClick={handleClick}>
+                Health and Medicine jobs
+              </List.Item>
+              <List.Item as={Link} value="emergency" onClick={handleClick}>
+                {" "}
+                Emergency call handlers
+              </List.Item>
+              <List.Item as={Link} value="farm" onClick={handleClick}>
+                Farm jobs
+              </List.Item>
+            </List>
+          </Grid.Column>
+          <Grid.Column width={3}>
+            <List link>
+              <List.Item as={Link} value="warehouse" onClick={handleClick}>
+                Warehouse jobs
+              </List.Item>
+              <List.Item as={Link} value="social care" onClick={handleClick}>
+                Social care jobs
+              </List.Item>
+              <List.Item as={Link} value="administration" onClick={handleClick}>
+                Administration jobs
+              </List.Item>
             </List>
           </Grid.Column>
         </Grid.Row>
@@ -51,3 +119,4 @@ export const TrendingJob = () => {
     </Container>
   );
 };
+export default observer(TrendingJob);

@@ -11,6 +11,11 @@ export interface IQueryRequest extends URLSearchParams {
   contract?: string;
 }
 
+export interface IQuerySingle extends URLSearchParams {
+  jobTitle?: string;
+  partTime?: boolean;
+}
+
 export interface IQuery {
   jobTitle?: string;
   locationName?: string;
@@ -43,14 +48,24 @@ export interface IJobResult {
   contractType?: string;
   jobDescription?: string;
   applications?: number;
+  photos?: string;
 }
 
 export interface IListSearchResult {
   count: number;
   lists: IJobResult[];
+  counters: ICounters;
 }
 
 export interface ICounter {
   totalJobs: number;
   addedToday: number;
+}
+
+export interface ICounters {
+  permanent?: number;
+  temporary?: number;
+  contract?: number;
+  fullTime?: number;
+  partTime?: number;
 }

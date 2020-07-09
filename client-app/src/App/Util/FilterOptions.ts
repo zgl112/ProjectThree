@@ -46,3 +46,12 @@ export const contractType = [
   { text: "Contract", value: "Contract" },
   { text: "Temporary", value: "Temporary" },
 ];
+
+export const imageSelector = [
+  { key: 1, value: "/assets/reedTechnology.png" },
+  { key: 2, value: "/assets/reedBussiness.png" },
+  { key: 3, value: "/assets/reedEngine.png" },
+  { key: 4, value: "/assets/reedProcurement.png" },
+  { key: 5, value: "/assets/reedAcc.png" },
+  { key: 0, value: "/assets/reedLogo2.png" },
+];

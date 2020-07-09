@@ -104,5 +104,23 @@ namespace Application.ElasticSearch
             var job = JsonConvert.DeserializeObject<JobModelApi>(responseBody);
             return Mapping.Job(job, applications);
         }
+
+        public GeneralCounters GetGeneral(List<JobModel> list)
+        {
+            return new Domain.GeneralCounters
+            {
+                Permanent = list.Where(job => job.ContractType == "Permanent").ToList().Count(),
+                Temporary = list.Where(job => job.ContractType == "Temporary").ToList().Count(),
+                Contract = list.Where(job => job.ContractType == "Contract").ToList().Count(),
+                FullTime = list.Where(job => job.FullTime == true).ToList().Count(),
+                PartTime = list.Where(job => job.PartTime == true).ToList().Count()
+            };
+
+        }
+
+        public GeneralCounters GetGeneral()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
