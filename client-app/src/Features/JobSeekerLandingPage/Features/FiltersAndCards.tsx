@@ -1,28 +1,21 @@
-import React, { useContext, useState, useEffect, SyntheticEvent } from "react";
+import React, { useState, SyntheticEvent } from "react";
 import {
   Grid,
   GridColumn,
   Header,
   Container,
   Pagination,
-  PaginationProps,
 } from "semantic-ui-react";
 import Filters from "./Filters";
 import Cards from "./Cards";
-import {
-  IListSearchResult,
-  ICounters,
-  IJobResult,
-} from "../../../App/Models/Models";
+import { IListSearchResult, ICounters } from "../../../App/Models/Models";
 import { observer } from "mobx-react-lite";
-import { JobStore } from "../../../App/Store/jobsStore";
 
 const FiltersAndCards: React.FC<{
   jobs?: IListSearchResult;
   loadingInitial: boolean;
   counters: ICounters;
 }> = ({ jobs, loadingInitial, counters }) => {
-  const jobsStore = useContext(JobStore);
   const [currentPage, setCurrentPage] = useState(1);
 
   const [postsPerPage] = useState(5);
@@ -56,7 +49,6 @@ const FiltersAndCards: React.FC<{
               ""
             ) : (
               <Pagination
-                // ellipsisItem={null}
                 firstItem={null}
                 lastItem={null}
                 siblingRange={2}

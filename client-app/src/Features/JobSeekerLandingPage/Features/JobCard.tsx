@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import {
   Grid,
   Card,
@@ -9,7 +9,6 @@ import {
   Modal,
   Button,
   CardGroup,
-  Image,
   Segment,
   SegmentGroup,
 } from "semantic-ui-react";

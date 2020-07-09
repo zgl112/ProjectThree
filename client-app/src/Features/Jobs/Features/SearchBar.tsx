@@ -1,7 +1,5 @@
 import React, { useContext, useEffect } from "react";
 import { observer } from "mobx-react-lite";
-import { Redirect, useHistory } from "react-router-dom";
-import { history } from "../../../index";
 import {
   Button,
   Container,

@@ -1,20 +1,14 @@
-import React, {
-  SyntheticEvent,
-  useState,
-  useContext,
-  useCallback,
-} from "react";
+import React, { SyntheticEvent, useContext } from "react";
 import { Container, Grid, List } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { IQueryRequest } from "../../../App/Models/Models";
 import { JobStore } from "../../../App/Store/jobsStore";
 import { observer } from "mobx-react-lite";
-import { sleep } from "../.././../App/API/agent";
 
 const TrendingJob = () => {
   const [queryX, setQuery] = React.useState<IQueryRequest>();
   const jobsStore = useContext(JobStore);
-  const { combineQuery, setSearchParams, getListJobs } = jobsStore;
+  const { setSearchParams } = jobsStore;
 
   const handleClick = async (
     e: SyntheticEvent<HTMLElement, Event>,

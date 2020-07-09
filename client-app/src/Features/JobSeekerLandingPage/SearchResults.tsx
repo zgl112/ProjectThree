@@ -5,7 +5,6 @@ import FiltersAndCards from "./Features/FiltersAndCards";
 import { JobStore } from "../../App/Store/jobsStore";
 import { observer } from "mobx-react-lite";
 import { withRouter } from "react-router-dom";
-import { toJS } from "mobx";
 
 const SearchResults = () => {
   const jobsStore = useContext(JobStore);
@@ -23,7 +22,7 @@ const SearchResults = () => {
 
     getListJobs(query!);
     getCounters(jobs!);
-  }, []);
+  }, [getListJobs, getCounters, getQuery, jobs]);
   return (
     <Segment style={{ backgroundColor: "#f5f7fa" }}>
       <SearchBar />

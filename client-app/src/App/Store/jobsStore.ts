@@ -1,11 +1,4 @@
-import {
-  observable,
-  action,
-  runInAction,
-  configure,
-  toJS,
-  computed,
-} from "mobx";
+import { observable, action, runInAction, configure } from "mobx";
 import {
   ICounter,
   IQueryRequest,
@@ -20,10 +13,6 @@ import { imageSelector } from "../Util/FilterOptions";
 var ls = require("local-storage");
 
 configure({ enforceActions: "always" });
-
-const sleep = (milliseconds: number) => {
-  return new Promise((resolve) => setTimeout(resolve, milliseconds));
-};
 
 export class JobsStore {
   @observable counter: ICounter | undefined;

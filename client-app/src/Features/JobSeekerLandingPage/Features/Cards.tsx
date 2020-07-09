@@ -18,7 +18,6 @@ import { observer } from "mobx-react-lite";
 import Dotdotdot from "react-dotdotdot";
 import { formatDistance, parseISO } from "date-fns";
 import { LoadingComponent } from "../../../App/Layout/LoadingComponent";
-import { JobStore } from "../../../App/Store/jobsStore";
 
 const Cards: React.FC<{
   jobs: IListSearchResult;
