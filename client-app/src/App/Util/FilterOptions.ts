@@ -55,7 +55,6 @@ export const imageSelector = [
   { key: 5, value: "/assets/reedAcc.png" },
   { key: 0, value: "/assets/reedLogo2.png" },
 ];
-<<<<<<< HEAD
 
 export const employerSelector = [
   { key: 1, text: "hays", value: "/assets/hays.png" },
@@ -84,5 +83,3 @@ export const employerSelector = [
     value: "/assets/nhsjobs.png",
   },
 ];
-=======
->>>>>>> a2214b3465e962731657981ae8b86b74048109a0
