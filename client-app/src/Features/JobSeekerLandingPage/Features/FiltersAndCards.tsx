@@ -1,10 +1,15 @@
+<<<<<<< HEAD
 import React, { useContext, useState, useEffect, SyntheticEvent } from "react";
+=======
+import React, { useState, SyntheticEvent } from "react";
+>>>>>>> a2214b3465e962731657981ae8b86b74048109a0
 import {
   Grid,
   GridColumn,
   Header,
   Container,
   Pagination,
+<<<<<<< HEAD
   PaginationProps,
 } from "semantic-ui-react";
 import Filters from "./Filters";
@@ -14,6 +19,12 @@ import {
   ICounters,
   IJobResult,
 } from "../../../App/Models/Models";
+=======
+} from "semantic-ui-react";
+import Filters from "./Filters";
+import Cards from "./Cards";
+import { IListSearchResult, ICounters } from "../../../App/Models/Models";
+>>>>>>> a2214b3465e962731657981ae8b86b74048109a0
 import { observer } from "mobx-react-lite";
 import { JobStore } from "../../../App/Store/jobsStore";
 
@@ -22,7 +33,10 @@ const FiltersAndCards: React.FC<{
   loadingInitial: boolean;
   counters: ICounters;
 }> = ({ jobs, loadingInitial, counters }) => {
+<<<<<<< HEAD
   const jobsStore = useContext(JobStore);
+=======
+>>>>>>> a2214b3465e962731657981ae8b86b74048109a0
   const [currentPage, setCurrentPage] = useState(1);
 
   const [postsPerPage] = useState(5);
@@ -56,7 +70,10 @@ const FiltersAndCards: React.FC<{
               ""
             ) : (
               <Pagination
+<<<<<<< HEAD
                 // ellipsisItem={null}
+=======
+>>>>>>> a2214b3465e962731657981ae8b86b74048109a0
                 firstItem={null}
                 lastItem={null}
                 siblingRange={2}

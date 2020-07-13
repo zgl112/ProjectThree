@@ -1,6 +1,9 @@
 import React, { useContext, useEffect } from "react";
 import { observer } from "mobx-react-lite";
+<<<<<<< HEAD
 
+=======
+>>>>>>> a2214b3465e962731657981ae8b86b74048109a0
 import {
   Button,
   Container,

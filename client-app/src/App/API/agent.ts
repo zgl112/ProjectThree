@@ -1,12 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { toast } from "react-toastify";
 import { history } from "../..";
-import {
-  ICounter,
-  IJobResult,
-  IQueryRequest,
-  IListSearchResult,
-} from "../Models/Models";
+import { ICounter, IJobResult, IListSearchResult } from "../Models/Models";
 
 axios.defaults.baseURL = "http://localhost:5000/api/search";
 
