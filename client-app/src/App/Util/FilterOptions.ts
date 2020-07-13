@@ -55,3 +55,31 @@ export const imageSelector = [
   { key: 5, value: "/assets/reedAcc.png" },
   { key: 0, value: "/assets/reedLogo2.png" },
 ];
+
+export const employerSelector = [
+  { key: 1, text: "hays", value: "/assets/hays.png" },
+  { key: 2, text: "the training room", value: "/assets/trainingroom.png" },
+  { key: 3, text: "tradewind", value: "/assets/tradewind.png" },
+  { key: 4, text: "rise", value: "/assets/rise.png" },
+  { key: 5, text: "prospero", value: "/assets/prospero.png" },
+  {
+    key: 0,
+    text: "teaching personnel",
+    value: "/assets/teachingpersonnel.png",
+  },
+  {
+    key: 6,
+    text: "academics",
+    value: "/assets/academics.png",
+  },
+  {
+    key: 7,
+    text: "NHS National Services Scotland",
+    value: "/assets/nhsscotland.png",
+  },
+  {
+    key: 8,
+    text: "NHS Business Services Authority Jobs",
+    value: "/assets/nhsjobs.png",
+  },
+];

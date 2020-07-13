@@ -2,7 +2,6 @@ import React from "react";
 import { Container, Grid, Card } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
-const extra = <Link to={`/`}>Company placeholder</Link>;
 
 export const DisplayJobsCard = () => {
   return (
@@ -21,35 +20,56 @@ export const DisplayJobsCard = () => {
         <Grid centered>
           <Grid.Row columns={3}>
             <Grid.Column width={3}>
-              <Card image="/assets/placeholder.png" extra={extra}></Card>
+              <Card image="/assets/hays.png" extra={<p>Hays Company</p>}></Card>
             </Grid.Column>
             <Grid.Column width={3}>
-              <Card image="/assets/placeholder.png" extra={extra}></Card>
+              <Card
+                image="/assets/trainingroom.png"
+                extra={<p>The training room</p>}
+              ></Card>
             </Grid.Column>
             <Grid.Column width={3}>
-              <Card image="/assets/placeholder.png" extra={extra}></Card>
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row columns={3}>
-            <Grid.Column width={3}>
-              <Card image="/assets/placeholder.png" extra={extra}></Card>
-            </Grid.Column>
-            <Grid.Column width={3}>
-              <Card image="/assets/placeholder.png" extra={extra}></Card>
-            </Grid.Column>
-            <Grid.Column width={3}>
-              <Card image="/assets/placeholder.png" extra={extra}></Card>
+              <Card
+                image="/assets/tradewind.png"
+                extra={<p>Tradewind</p>}
+              ></Card>
             </Grid.Column>
           </Grid.Row>
           <Grid.Row columns={3}>
             <Grid.Column width={3}>
-              <Card image="/assets/placeholder.png" extra={extra}></Card>
+              <Card
+                image="/assets/rise.png"
+                extra={<p>Rise Technical</p>}
+              ></Card>
             </Grid.Column>
             <Grid.Column width={3}>
-              <Card image="/assets/placeholder.png" extra={extra}></Card>
+              <Card
+                image="/assets/prospero.png"
+                extra={<p>Prospero Teaching</p>}
+              ></Card>
             </Grid.Column>
             <Grid.Column width={3}>
-              <Card image="/assets/placeholder.png" extra={extra}></Card>
+              <Card
+                image="/assets/teachingpersonnel.png"
+                extra={<p>Teaching Personnel</p>}
+              ></Card>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row columns={3}>
+            <Grid.Column width={3}>
+              <Card
+                image="/assets/academics.png"
+                extra={<p>Academics</p>}
+              ></Card>
+            </Grid.Column>
+            <Grid.Column width={3}>
+              <Card
+                image="/assets/nhsscotland.png"
+                extra={<p>NHS Scotland</p>}
+              ></Card>
+            </Grid.Column>
+            <Grid.Column width={3}>
+              <Card image="/assets/nhsjobs.png" extra={<p>NHS Jobs</p>}></Card>
             </Grid.Column>
           </Grid.Row>
         </Grid>

@@ -49,7 +49,7 @@ namespace Application.ElasticSearch
         {
             var url = _settings.ApiEndpoint;
             HttpResponseMessage response = await APIClient().GetAsync($"{url}search?keywords=all");
-            response.EnsureSuccessStatusCode();
+            //  response.EnsureSuccessStatusCode();
             string responseBody = await response.Content.ReadAsStringAsync();
             var jobs = JsonConvert.DeserializeObject<SearchResult>(responseBody);
             return jobs.TotalResults;

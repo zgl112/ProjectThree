@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { observer } from "mobx-react-lite";
-import { Redirect, useHistory } from "react-router-dom";
-import { history } from "../../../index";
+
 import {
   Button,
   Container,
@@ -72,10 +71,7 @@ const SearchBar = () => {
                     />
                   </Form.Field>
                   <Form.Field>
-                    <Button primary>
-                      {/* primary as={Link} to="jobs/results" */}
-                      Search
-                    </Button>
+                    <Button primary>Search</Button>
                   </Form.Field>
                 </Form.Group>
               </Form>
