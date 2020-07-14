@@ -42,6 +42,7 @@ namespace Application.JobsApi
                 queryBuilder.PartTime(request.Request.PartTime);
                 queryBuilder.FullTime(request.Request.FullTime);
                 queryBuilder.ContractType(request.Request.ContractType);
+                queryBuilder.EmployerName(request.Request.EmployerName);
 
                 var boolQuery = queryBuilder.Build();
 

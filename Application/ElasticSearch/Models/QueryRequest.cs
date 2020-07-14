@@ -12,5 +12,6 @@ namespace Application.ElasticSearch.Models
         public bool? PartTime { get; set; }
         public bool? FullTime { get; set; }
         public string ContractType { get; set; }
+        public string EmployerName { get; set; }
     }
 }

@@ -14,11 +14,6 @@ const DetailedView: React.FC<RouteComponentProps<DetailParams>> = ({
   match,
   history,
 }) => {
-<<<<<<< HEAD
-  // const jobsStore = useContext(JobStore);
-  // const { loadJob, job, loadingInitial } = jobsStore;
-
-=======
   const jobsStore = useContext(JobStore);
   const {
     loadingInitial,
@@ -28,7 +23,6 @@ const DetailedView: React.FC<RouteComponentProps<DetailParams>> = ({
     loadJob,
     job,
   } = jobsStore;
->>>>>>> a2214b3465e962731657981ae8b86b74048109a0
   useEffect(() => {
     let id = parseInt(match.params.id);
     loadJob(id);
@@ -39,22 +33,6 @@ const DetailedView: React.FC<RouteComponentProps<DetailParams>> = ({
 
     getListJobs(query!);
   }, [getListJobs, getQuery]);
-
-  const jobsStore = useContext(JobStore);
-  const {
-    loadingInitial,
-    jobs,
-    getListJobs,
-    getQuery,
-    loadJob,
-    job,
-  } = jobsStore;
-
-  useEffect(() => {
-    const query = getQuery();
-
-    getListJobs(query!);
-  }, []);
 
   if (loadingInitial)
     return <LoadingComponent content="Getting job details..." />;

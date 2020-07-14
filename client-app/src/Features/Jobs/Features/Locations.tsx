@@ -1,6 +1,17 @@
-import React from "react";
-import { Container, Grid, List, Image, Segment, Item } from "semantic-ui-react";
-import { NavLink } from "react-router-dom";
+import React, { useContext, SyntheticEvent } from "react";
+import {
+  Container,
+  Grid,
+  List,
+  Image,
+  Segment,
+  Item,
+  Header,
+} from "semantic-ui-react";
+import { NavLink, Link } from "react-router-dom";
+import { IQueryRequest } from "../../../App/Models/Models";
+import { JobStore } from "../../../App/Store/jobsStore";
+import { observer } from "mobx-react-lite";
 
 const textStyle = {
   position: "absolute",
@@ -11,7 +22,26 @@ const textStyle = {
   textAlign: "center",
 };
 
-export const Locations = () => {
+const Locations = () => {
+  const [queryX, setQuery] = React.useState<IQueryRequest>();
+  const jobsStore = useContext(JobStore);
+  const { setSearchParams } = jobsStore;
+
+  const handleClick = async (
+    e: SyntheticEvent<HTMLElement, Event>,
+    data: any
+  ) => {
+    setQuery({
+      ...queryX!,
+      locationName: data.value,
+    });
+
+    if (queryX?.locationName === data.value) {
+      console.log(queryX);
+
+      await setSearchParams(queryX!);
+    }
+  };
   return (
     <Container>
       <br style={{ lineHeight: "10px" }} />
@@ -39,7 +69,13 @@ export const Locations = () => {
                   <Item.Group>
                     <Item>
                       <Item.Content>
-                        <h1>London</h1>
+                        <List.Item
+                          as={Link}
+                          value="london"
+                          onClick={handleClick}
+                        >
+                          <h1 style={{ color: "white" }}> London</h1>
+                        </List.Item>
                       </Item.Content>
                     </Item>
                   </Item.Group>
@@ -47,13 +83,79 @@ export const Locations = () => {
               </Grid.Row>
             </Grid>
             <br />
-            <List link>
-              <List.Item as="a">Job Category placeholder</List.Item>
-              <List.Item as="a">Job Category placeholder</List.Item>
-              <List.Item as="a">Job Category placeholder</List.Item>
-              <List.Item as="a">Job Category placeholder</List.Item>
-              <List.Item as="a">Job Category placeholder</List.Item>
-              <List.Item as="a">Job Category placeholder</List.Item>
+            <List link >
+              <List.Item
+                style={{ color: "#0079d1" }}
+                as={Link}
+                value="london"
+                onClick={handleClick}
+              >
+                <h4>Jobs in London</h4>
+              </List.Item>
+              <List.Item
+                style={{ color: "#0079d1" }}
+                as={Link}
+                value="south east england"
+                onClick={handleClick}
+              >
+                <h4>Jobs in South East England</h4>
+              </List.Item>
+              <List.Item
+                style={{ color: "#0079d1", paddingLeft: "20px" }}
+                as={Link}
+                value="surrey"
+                onClick={handleClick}
+              >
+                Jobs in Surrey
+              </List.Item>
+              <List.Item
+                style={{ color: "#0079d1", paddingLeft: "20px" }}
+                as={Link}
+                value="Essex"
+                onClick={handleClick}
+              >
+                Jobs in Essex
+              </List.Item>
+              <List.Item
+                style={{ color: "#0079d1", paddingLeft: "20px" }}
+                as={Link}
+                value="Kent"
+                onClick={handleClick}
+              >
+                Jobs in Kent
+              </List.Item>
+              <List.Item
+                style={{ color: "#0079d1" }}
+                as={Link}
+                value="south west england"
+                onClick={handleClick}
+              >
+                <h4>Jobs in South West England</h4>
+              </List.Item>
+              <List.Item
+                style={{ color: "#0079d1", paddingLeft: "20px" }}
+                as={Link}
+                value="bristol"
+                onClick={handleClick}
+              >
+                Jobs in Bristol
+              </List.Item>{" "}
+              <List.Item
+                style={{ color: "#0079d1", paddingLeft: "20px" }}
+                as={Link}
+                value="Devon"
+                onClick={handleClick}
+              >
+                Jobs in Devon
+              </List.Item>{" "}
+              <List.Item
+                style={{ color: "#0079d1", paddingLeft: "20px" }}
+                as={Link}
+                value="Plymouth"
+                onClick={handleClick}
+              >
+                Jobs in Plymouth
+              </List.Item>
             </List>
           </Grid.Column>
           <Grid.Column width={4}>
@@ -69,7 +171,13 @@ export const Locations = () => {
                   <Item.Group>
                     <Item>
                       <Item.Content>
-                        <h1>Glasgow</h1>
+                        <List.Item
+                          as={Link}
+                          value="Glasgow"
+                          onClick={handleClick}
+                        >
+                          <h1 style={{ color: "white" }}> Glasgow</h1>
+                        </List.Item>
                       </Item.Content>
                     </Item>
                   </Item.Group>
@@ -99,7 +207,13 @@ export const Locations = () => {
                   <Item.Group>
                     <Item>
                       <Item.Content>
-                        <h1>Manchester</h1>
+                        <List.Item
+                          as={Link}
+                          value="Manchester"
+                          onClick={handleClick}
+                        >
+                          <h1 style={{ color: "white" }}> Manchester</h1>
+                        </List.Item>
                       </Item.Content>
                     </Item>
                   </Item.Group>
@@ -129,7 +243,13 @@ export const Locations = () => {
                   <Item.Group>
                     <Item>
                       <Item.Content>
-                        <h1>Liverpool</h1>
+                        <List.Item
+                          as={Link}
+                          value="Liverpool"
+                          onClick={handleClick}
+                        >
+                          <h1 style={{ color: "white" }}> Liverpool</h1>
+                        </List.Item>
                       </Item.Content>
                     </Item>
                   </Item.Group>
@@ -152,3 +272,4 @@ export const Locations = () => {
     </Container>
   );
 };
+export default observer(Locations);

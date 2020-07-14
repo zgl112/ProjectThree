@@ -1,10 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { SegmentGroup, Segment, Container, Header } from "semantic-ui-react";
 import { IListSearchResult } from "../../../App/Models/Models";
-<<<<<<< HEAD
-import { JobStore } from "../../../App/Store/jobsStore";
-=======
->>>>>>> a2214b3465e962731657981ae8b86b74048109a0
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 

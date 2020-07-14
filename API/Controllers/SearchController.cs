@@ -14,7 +14,7 @@ namespace API.Controllers
     {
 
         [HttpGet("results")]
-        public async Task<ListJobs> SearchJobs(string jobTitle, string locationName, int? minimumSalary, int? maximumSalary, DateTime? date, bool? partTime, bool? fullTime, string contractType)
+        public async Task<ListJobs> SearchJobs(string jobTitle, string locationName, int? minimumSalary, int? maximumSalary, DateTime? date, bool? partTime, bool? fullTime, string contractType, string employerName)
         {
             var query = new QueryRequest
             {
@@ -25,7 +25,7 @@ namespace API.Controllers
                 Date = date,
                 PartTime = partTime,
                 FullTime = fullTime,
-                ContractType = contractType
+                EmployerName = employerName
             };
 
             return await Mediator.Send(new SearchJob.Query { Request = query });

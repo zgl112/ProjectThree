@@ -4,7 +4,7 @@ import SearchBar from "./Features/SearchBar";
 import TrendingJob from "./Features/TrendingJob";
 import { DisplayJobsCard } from "./Features/DisplayJobsCard";
 import { Sectors } from "./Features/Sectors";
-import { Locations } from "./Features/Locations";
+import Locations from "./Features/Locations";
 import { Courses } from "./Features/Courses";
 import { observer } from "mobx-react-lite";
 

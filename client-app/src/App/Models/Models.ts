@@ -9,6 +9,7 @@ export interface IQueryRequest extends URLSearchParams {
   partTime?: boolean;
   fullTime?: boolean;
   contract?: string;
+  employerName?: string;
 }
 
 export interface IQuerySingle extends URLSearchParams {
@@ -26,6 +27,7 @@ export interface IQuery {
   fullTime?: boolean;
   contract?: string;
   jobId?: number;
+  employerName?: string;
 }
 
 export interface IJobResult {

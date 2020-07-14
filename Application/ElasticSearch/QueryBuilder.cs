@@ -15,6 +15,7 @@ namespace Application.ElasticSearch
         private QueryContainer _fullTimeQuery;
         private QueryContainer _contractTypeQuery;
         private QueryContainer _matchId;
+        private QueryContainer _employerName;
 
         public void MatchId(int jobId)
         {
@@ -156,6 +157,25 @@ namespace Application.ElasticSearch
             }
         }
 
+        public void EmployerName(string name)
+        {
+
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                _employerName = new MatchQuery
+                {
+                    Field = "employerName",
+                    Query = name
+
+                };
+            }
+            else
+            {
+                _employerName = new MatchAllQuery();
+            }
+        }
+
+
         public BoolQuery Build()
         {
             return new BoolQuery
@@ -166,10 +186,11 @@ namespace Application.ElasticSearch
                 },
                 Must = new List<QueryContainer>
                 {
+                    _employerName,
                     _locationNameQuery,
                     _jobTitleQuery,
                     _minimumSalaryQuery,
-                    _maximumSalaryQuery
+                    _maximumSalaryQuery,
                 },
                 Should = new List<QueryContainer>
                 {

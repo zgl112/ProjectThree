@@ -1,9 +1,29 @@
-import React from "react";
-import { Container, Grid, Card } from "semantic-ui-react";
+import React, { useContext, SyntheticEvent } from "react";
+import { Container, Grid, Card, List } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-
+import { JobStore } from "../../../App/Store/jobsStore";
+import { IQueryRequest } from "../../../App/Models/Models";
 
 export const DisplayJobsCard = () => {
+  const [queryX, setQuery] = React.useState<IQueryRequest>();
+  const jobsStore = useContext(JobStore);
+  const { setSearchParams } = jobsStore;
+
+  const handleClick = async (
+    e: SyntheticEvent<HTMLElement, Event>,
+    data: any
+  ) => {
+    setQuery({
+      ...queryX!,
+      employerName: data.value,
+    });
+
+    if (queryX?.employerName === data.value) {
+      console.log(queryX);
+
+      await setSearchParams(queryX!);
+    }
+  };
   return (
     <Container fluid style={{ backgroundColor: "#f5f7fa" }}>
       <Container>
@@ -20,18 +40,41 @@ export const DisplayJobsCard = () => {
         <Grid centered>
           <Grid.Row columns={3}>
             <Grid.Column width={3}>
-              <Card image="/assets/hays.png" extra={<p>Hays Company</p>}></Card>
+              <Card
+                image="/assets/hays.png"
+                extra={
+                  <List.Item
+                    as={Link}
+                    value="Hays Specialist Recruitment Limited"
+                    onClick={handleClick}
+                  >
+                    Hays Company
+                  </List.Item>
+                }
+              ></Card>
             </Grid.Column>
             <Grid.Column width={3}>
               <Card
                 image="/assets/trainingroom.png"
-                extra={<p>The training room</p>}
+                extra={
+                  <List.Item
+                    as={Link}
+                    value="The training room"
+                    onClick={handleClick}
+                  >
+                    The Training Room
+                  </List.Item>
+                }
               ></Card>
             </Grid.Column>
             <Grid.Column width={3}>
               <Card
                 image="/assets/tradewind.png"
-                extra={<p>Tradewind</p>}
+                extra={
+                  <List.Item as={Link} value="tradewind" onClick={handleClick}>
+                    Tradewind
+                  </List.Item>
+                }
               ></Card>
             </Grid.Column>
           </Grid.Row>
@@ -39,19 +82,35 @@ export const DisplayJobsCard = () => {
             <Grid.Column width={3}>
               <Card
                 image="/assets/rise.png"
-                extra={<p>Rise Technical</p>}
+                extra={
+                  <List.Item as={Link} value="rise" onClick={handleClick}>
+                    Rise Technical
+                  </List.Item>
+                }
               ></Card>
             </Grid.Column>
             <Grid.Column width={3}>
               <Card
                 image="/assets/prospero.png"
-                extra={<p>Prospero Teaching</p>}
+                extra={
+                  <List.Item as={Link} value="prospero" onClick={handleClick}>
+                    Prospero Learning
+                  </List.Item>
+                }
               ></Card>
             </Grid.Column>
             <Grid.Column width={3}>
               <Card
                 image="/assets/teachingpersonnel.png"
-                extra={<p>Teaching Personnel</p>}
+                extra={
+                  <List.Item
+                    as={Link}
+                    value="Teaching Personnel"
+                    onClick={handleClick}
+                  >
+                    The Teaching Personnel
+                  </List.Item>
+                }
               ></Card>
             </Grid.Column>
           </Grid.Row>
@@ -59,17 +118,40 @@ export const DisplayJobsCard = () => {
             <Grid.Column width={3}>
               <Card
                 image="/assets/academics.png"
-                extra={<p>Academics</p>}
+                extra={
+                  <List.Item as={Link} value="Academics" onClick={handleClick}>
+                    Academics
+                  </List.Item>
+                }
               ></Card>
             </Grid.Column>
             <Grid.Column width={3}>
               <Card
                 image="/assets/nhsscotland.png"
-                extra={<p>NHS Scotland</p>}
+                extra={
+                  <List.Item
+                    as={Link}
+                    value="NHS National Services Scotland"
+                    onClick={handleClick}
+                  >
+                    NHS Scotland
+                  </List.Item>
+                }
               ></Card>
             </Grid.Column>
             <Grid.Column width={3}>
-              <Card image="/assets/nhsjobs.png" extra={<p>NHS Jobs</p>}></Card>
+              <Card
+                image="/assets/nhsjobs.png"
+                extra={
+                  <List.Item
+                    as={Link}
+                    value="NHS Business Services Authority Jobs"
+                    onClick={handleClick}
+                  >
+                    NHS Business
+                  </List.Item>
+                }
+              ></Card>
             </Grid.Column>
           </Grid.Row>
         </Grid>
