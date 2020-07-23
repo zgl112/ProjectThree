@@ -39,7 +39,7 @@ export const DisplayJobsCard = () => {
         <br />
         <Grid centered>
           <Grid.Row columns={3}>
-            <Grid.Column width={3}>
+            <Grid.Column width={4}>
               <Card
                 image="/assets/hays.png"
                 extra={
@@ -47,13 +47,14 @@ export const DisplayJobsCard = () => {
                     as={Link}
                     value="Hays Specialist Recruitment Limited"
                     onClick={handleClick}
-                  >
-                    Hays Company
+                  ><p style={{textAlign: "center"}}>
+                    Jobs at Hays Company
+                    </p>
                   </List.Item>
                 }
               ></Card>
             </Grid.Column>
-            <Grid.Column width={3}>
+            <Grid.Column width={4}>
               <Card
                 image="/assets/trainingroom.png"
                 extra={
@@ -62,44 +63,52 @@ export const DisplayJobsCard = () => {
                     value="The training room"
                     onClick={handleClick}
                   >
-                    The Training Room
+                   <p style={{textAlign: "center"}}>
+                    Jobs at The Training Room
+                    </p>
                   </List.Item>
                 }
               ></Card>
             </Grid.Column>
-            <Grid.Column width={3}>
+            <Grid.Column width={4}>
               <Card
                 image="/assets/tradewind.png"
                 extra={
                   <List.Item as={Link} value="tradewind" onClick={handleClick}>
-                    Tradewind
+                    <p style={{textAlign: "center"}}>
+                    Jobs at Tradewind
+                    </p>
                   </List.Item>
                 }
               ></Card>
             </Grid.Column>
           </Grid.Row>
           <Grid.Row columns={3}>
-            <Grid.Column width={3}>
+            <Grid.Column width={4}>
               <Card
                 image="/assets/rise.png"
                 extra={
                   <List.Item as={Link} value="rise" onClick={handleClick}>
-                    Rise Technical
+                    <p style={{textAlign: "center"}}>
+                    Jobs at Rise Technical
+                    </p>
                   </List.Item>
                 }
               ></Card>
             </Grid.Column>
-            <Grid.Column width={3}>
+            <Grid.Column width={4}>
               <Card
                 image="/assets/prospero.png"
                 extra={
                   <List.Item as={Link} value="prospero" onClick={handleClick}>
-                    Prospero Learning
+                    <p style={{textAlign: "center"}}>
+                    Jobs at Prospero Learning
+                    </p>
                   </List.Item>
                 }
               ></Card>
             </Grid.Column>
-            <Grid.Column width={3}>
+            <Grid.Column width={4}>
               <Card
                 image="/assets/teachingpersonnel.png"
                 extra={
@@ -108,24 +117,28 @@ export const DisplayJobsCard = () => {
                     value="Teaching Personnel"
                     onClick={handleClick}
                   >
-                    The Teaching Personnel
+                    <p style={{textAlign: "center"}}>
+                    Jobs at The Teaching Personnel
+                    </p>
                   </List.Item>
                 }
               ></Card>
             </Grid.Column>
           </Grid.Row>
           <Grid.Row columns={3}>
-            <Grid.Column width={3}>
+            <Grid.Column width={4}>
               <Card
                 image="/assets/academics.png"
                 extra={
                   <List.Item as={Link} value="Academics" onClick={handleClick}>
-                    Academics
+                    <p style={{textAlign: "center"}}>
+                    Jobs at Academics
+                    </p>
                   </List.Item>
                 }
               ></Card>
             </Grid.Column>
-            <Grid.Column width={3}>
+            <Grid.Column width={4}>
               <Card
                 image="/assets/nhsscotland.png"
                 extra={
@@ -134,12 +147,14 @@ export const DisplayJobsCard = () => {
                     value="NHS National Services Scotland"
                     onClick={handleClick}
                   >
-                    NHS Scotland
+                    <p style={{textAlign: "center"}}>
+                    Jobs at NHS Scotland
+                    </p>
                   </List.Item>
                 }
               ></Card>
             </Grid.Column>
-            <Grid.Column width={3}>
+            <Grid.Column width={4}>
               <Card
                 image="/assets/nhsjobs.png"
                 extra={
@@ -148,7 +163,9 @@ export const DisplayJobsCard = () => {
                     value="NHS Business Services Authority Jobs"
                     onClick={handleClick}
                   >
-                    NHS Business
+                    <p style={{textAlign: "center"}}>
+                    Jobs at NHS Business
+                    </p>
                   </List.Item>
                 }
               ></Card>

@@ -39,28 +39,42 @@ const TrendingJob = () => {
       <br />
       <Grid stackable centered>
         <Grid.Row>
-          <Grid.Column width={3}>
+          <Grid.Column width={4}>
             <List link>
               <List.Item as={Link} value="NHS" onClick={handleClick}>
-                NHS jobs
+              <p className="linkHover">
+                NHS Jobs
+                </p>
               </List.Item>
+              <br />
               <List.Item as={Link} value="immediate" onClick={handleClick}>
                 {" "}
-                Immediate start jobs
+                <p className="linkHover">
+                Immediate Start Jobs
+                </p>
               </List.Item>
+              <br />
               <List.Item as={Link} value="supermarket" onClick={handleClick}>
-                Supermarket jobs
+              <p className="linkHover">
+                Supermarket Jobs
+                </p>
               </List.Item>
             </List>
           </Grid.Column>
-          <Grid.Column width={3}>
+          <Grid.Column width={4}>
             <List link>
               <List.Item as={Link} value="delivery" onClick={handleClick}>
-                Delivery driver jobs
+              <p className="linkHover">
+                Delivery Driver Jobs
+                </p>
               </List.Item>
+              <br />
               <List.Item as={Link} value="work home" onClick={handleClick}>
-                Work from home jobs
+              <p className="linkHover">
+                Work From Home Jobs
+                </p>
               </List.Item>
+              <br />
               <List.Item
                 as={Link}
                 value="true"
@@ -74,34 +88,52 @@ const TrendingJob = () => {
                   }
                 }}
               >
-                Part time jobs
+                <p className="linkHover">
+                Part Time Jobs
+                </p>
               </List.Item>
             </List>
           </Grid.Column>
-          <Grid.Column width={3}>
+          <Grid.Column width={4}>
             <List link>
               <List.Item as={Link} value="medicine" onClick={handleClick}>
-                Health and Medicine jobs
+              <p className="linkHover">
+                Health and Medicine Jobs
+                </p>
               </List.Item>
+              <br />
               <List.Item as={Link} value="emergency" onClick={handleClick}>
                 {" "}
-                Emergency call handlers
+                <p className="linkHover">
+                Emergency Call Handler Jobs
+                </p>
               </List.Item>
+              <br />
               <List.Item as={Link} value="farm" onClick={handleClick}>
-                Farm jobs
+              <p className="linkHover">
+                Farm Jobs
+                </p>
               </List.Item>
             </List>
           </Grid.Column>
-          <Grid.Column width={3}>
+          <Grid.Column width={4}>
             <List link>
               <List.Item as={Link} value="warehouse" onClick={handleClick}>
-                Warehouse jobs
+              <p className="linkHover">
+                Warehouse Jobs
+                </p>
               </List.Item>
+              <br />
               <List.Item as={Link} value="social care" onClick={handleClick}>
-                Social care jobs
+              <p className="linkHover">
+                Social Care Jobs
+                </p>
               </List.Item>
+              <br />
               <List.Item as={Link} value="administration" onClick={handleClick}>
-                Administration jobs
+              <p className="linkHover">
+                Administration Jobs
+                </p>
               </List.Item>
             </List>
           </Grid.Column>

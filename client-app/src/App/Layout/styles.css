@@ -173,3 +173,7 @@ body {
   overflow: hidden;
   max-height: 120px;
 }
+.linkHover:hover{
+  color: black;
+  text-decoration: underline;
+}
