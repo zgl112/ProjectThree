@@ -5,6 +5,7 @@ import {
   IJobResult,
   IListSearchResult,
   ICounters,
+  ISuggest,
 } from "../Models/Models";
 import agent from "../API/agent";
 import { history } from "../../index";
@@ -30,6 +31,21 @@ export class JobsStore {
   @observable job?: IJobResult;
   @observable jobresult?: IJobResult;
   @observable jobsPag?: IJobResult[];
+  @observable indexButton = false;
+  @observable isuggestion?: ISuggest;
+  @observable suggestions?: ISuggest[];
+
+  @action createIndex = async () => {
+    this.indexButton = true;
+    await agent.createIndex();
+    try {
+      runInAction(async () => {
+        this.indexButton = false;
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   @action trendingQuery = async (data: string) => {
     const oldQuery: IQueryRequest = await ls.get("data");
@@ -189,6 +205,29 @@ export class JobsStore {
       });
 
       return this.jobs;
+    } catch (error) {
+      runInAction("load jobs error", () => {
+        console.log(error);
+        this.loadingInitial = false;
+      });
+    }
+  };
+
+  @action getListJobTitles = async (params: string) => {
+    this.isuggestion!.jobTitle = params;
+    try {
+      let jobs = await agent.listJobs(this.isuggestion!);
+      let suggestions: ISuggest[];
+      let suggestion: ISuggest;
+      runInAction("get list", () => {
+        jobs.lists.forEach((job) => {
+          suggestion.jobTitle = job.jobTitle;
+          suggestion.locationName = job.locationName;
+          suggestions?.push(suggestion);
+        });
+        this.suggestions = suggestions;
+      });
+      return this.suggestions;
     } catch (error) {
       runInAction("load jobs error", () => {
         console.log(error);

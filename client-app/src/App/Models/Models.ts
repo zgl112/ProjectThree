@@ -1,5 +1,10 @@
 import { RouteChildrenProps, RouteComponentProps } from "react-router-dom";
 
+export interface ISuggest extends URLSearchParams {
+  jobTitle?: string;
+  locationName?: string;
+}
+
 export interface IQueryRequest extends URLSearchParams {
   jobTitle?: string;
   locationName?: string;

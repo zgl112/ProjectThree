@@ -8,6 +8,6 @@
     "\\Application\\ElasticSearch",
     "\\Application\\JobsApi"
   ],
-  "SelectedNode": "\\API\\Controllers\\SearchController.cs",
+  "SelectedNode": "\\Application\\ElasticSearch\\JobBatchProcess.cs",
   "PreviewInSolutionExplorer": false
 }

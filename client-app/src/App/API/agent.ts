@@ -27,6 +27,7 @@ export const sleep = (ms: number) => (response: AxiosResponse) =>
   );
 
 const requests = {
+  getEasy: (url: string) => axios.get(url),
   get: (url: string) => axios.get(url).then(sleep(50)).then(responseBody),
   getForm: (url: string, body: {}) => axios.post(url, body).then(responseBody),
   post: (url: string, body: {}) =>
@@ -42,5 +43,7 @@ const Jobs = {
     requests.get(`/result/${id}`),
   listJobs: (params: URLSearchParams): Promise<IListSearchResult> =>
     axios.get("/results", { params: params }).then(responseBody),
+
+  createIndex: () => requests.getEasy("/createIndex"),
 };
 export default Jobs;

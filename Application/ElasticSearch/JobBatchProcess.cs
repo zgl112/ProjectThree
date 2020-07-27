@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json;
-using System.Threading;
 using Microsoft.Extensions.Options;
 using System.Net;
 
@@ -17,10 +16,12 @@ namespace Application.ElasticSearch
     {
 
         private readonly API _settings;
+        private ElasticClient _client;
 
         public JobBatchProcess(IOptions<API> settings)
         {
             _settings = settings.Value;
+
         }
         private HttpClient APIClient()
         {
@@ -59,7 +60,8 @@ namespace Application.ElasticSearch
         public async Task AllResults()
         {
             var number = await Counter();
-            for (var x = 0; x <= 1000; x += 100)
+            ElClient();
+            for (var x = 0; x <= 150; x += 100)
             {
                 var batch = await GetJobsIds(x);
                 foreach (var id in batch)
@@ -70,6 +72,26 @@ namespace Application.ElasticSearch
 
             }
         }
+        public Nest.CreateIndexResponse CreateIndexResponse(ElasticClient client)
+        {
+            return client.Indices.Create("reedapi", c => c
+            .Settings(s => s
+                .Analysis(a => a
+                     .Analyzers(an => an
+
+                             .Custom("edge_ngram_analyzer", ca => ca
+                                     .Filters("lowercase")
+                                     .Tokenizer("edge_ngram_analyzer")
+                                    )
+                                ).Tokenizers(d => d.NGram("edge_ngram_analyzer", de => de
+                                .MinGram(4)
+                                .MaxGram(5)
+                                .TokenChars(TokenChar.Letter)))
+        )
+            ).Map<JobModel>(m => m.Properties(p => p.Text(t => t.Name(n => n.JobTitle).Analyzer("edge_ngram_analyzer"))))
+
+            );
+        }
         public ElasticClient ElClient()
         {
             var settings = new ConnectionSettings(new Uri("http://localhost:9200"));
@@ -79,20 +101,19 @@ namespace Application.ElasticSearch
             settings.BasicAuthentication(user, pwd);
             settings.DefaultIndex("reedapi").EnableDebugMode()
             .DisableDirectStreaming()
+
             .PrettyJson();
 
             var client = new ElasticClient(settings);
-            var createIndexResponse = client.Indices.Create("reedapi", c => c
-            .Settings(s => s
-                .NumberOfShards(1)
-                .NumberOfReplicas(0))
-                .Map<JobModel>(d => d.AutoMap())
-        );
+
+            CreateIndexResponse(client);
+            _client = client;
             return client;
         }
         public void SetSendJob(JobModel job)
         {
-            ElClient().Index(new IndexRequest<JobModel>(job, "reedapi"));
+            _client.IndexDocumentAsync(job);
+
         }
         public async Task<JobModel> GetJob(int id, int applications)
         {
