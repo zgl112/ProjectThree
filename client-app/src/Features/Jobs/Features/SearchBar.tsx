@@ -11,6 +11,8 @@ import {
 import { JobStore } from "../../../App/Store/jobsStore";
 import { IQueryRequest } from "../../../App/Models/Models";
 import { Form as FinalForm, Field } from "react-final-form";
+import Auto from "../../../App/Testing";
+
 const SearchBar = () => {
   const jobsStore = useContext(JobStore);
   const { jobsCounter, counter, setSearchParams, query } = jobsStore;
@@ -58,6 +60,7 @@ const SearchBar = () => {
                       component="input"
                     />{" "}
                   </Form.Field>
+                  <Auto />
                   <Form.Field>
                     <label style={{ color: "white", textAlign: "left" }}>
                       Where

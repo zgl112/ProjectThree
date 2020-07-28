@@ -81,6 +81,25 @@ export class JobsStore {
     }
   };
 
+  @action setSearchParamsAutosuggest = async (data: IQueryRequest) => {
+    try {
+      runInAction("loading query", () => {
+        if (ls.get("data") !== null) {
+          ls.remove("data");
+          ls.clear();
+          ls.set("data", data);
+        } else {
+          ls.set("data", data);
+        }
+
+        this.query = data;
+      });
+      return this.query;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   handlePhoto = () => {
     const min = 0;
     const max = 5;
