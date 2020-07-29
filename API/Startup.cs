@@ -50,7 +50,8 @@ namespace API
                 app.UseDeveloperExceptionPage();
 
 
-
+                app.UseDefaultFiles();
+                app.UseStaticFiles();
                 // app.UseHttpsRedirection();
 
                 app.UseRouting();
@@ -60,6 +61,7 @@ namespace API
                 app.UseEndpoints(endpoints =>
                 {
                     endpoints.MapControllers();
+                    endpoints.MapFallbackToController("Index", "Fallback");
                 });
             }
         }
