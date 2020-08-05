@@ -50,7 +50,7 @@ namespace Application.ElasticSearch
         {
             var url = _settings.ApiEndpoint;
             HttpResponseMessage response = await APIClient().GetAsync($"{url}search?keywords=all");
-            //  response.EnsureSuccessStatusCode();
+            response.EnsureSuccessStatusCode();
             string responseBody = await response.Content.ReadAsStringAsync();
             var jobs = JsonConvert.DeserializeObject<SearchResult>(responseBody);
             return jobs.TotalResults;
@@ -61,7 +61,7 @@ namespace Application.ElasticSearch
         {
             var number = await Counter();
             ElClient();
-            for (var x = 0; x <= 150; x += 100)
+            for (var x = 0; x <= 900; x += 100)
             {
                 var batch = await GetJobsIds(x);
                 foreach (var id in batch)
@@ -94,7 +94,8 @@ namespace Application.ElasticSearch
         }
         public ElasticClient ElClient()
         {
-            var settings = new ConnectionSettings(new Uri("http://localhost:9200"));
+            var url = _settings.ElasticEndpoint;
+            var settings = new ConnectionSettings(new Uri(url));
             settings.EnableHttpCompression();
             var user = _settings.ElasticUser;
             var pwd = _settings.ElasticPwd;
@@ -137,11 +138,6 @@ namespace Application.ElasticSearch
                 PartTime = list.Where(job => job.PartTime == true).ToList().Count()
             };
 
-        }
-
-        public GeneralCounters GetGeneral()
-        {
-            throw new NotImplementedException();
         }
     }
 }

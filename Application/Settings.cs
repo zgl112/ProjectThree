@@ -13,5 +13,7 @@ namespace Application
 
         public string ElasticUser { get; set; }
         public string ElasticPwd { get; set; }
+
+        public string ElasticEndpoint { get; set; }
     }
 }

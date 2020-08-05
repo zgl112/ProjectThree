@@ -1,0 +1,24 @@
+
+{
+    "region" : "eu-west-2",
+    "configuration" : "Release",
+    "framework"     : "netcoreapp3.1",
+    "self-contained" : false,
+    "application"    : "ReedGroupFurloughed",
+    "environment"    : "ReedOnline",
+    "enable-xray"    : false,
+    "enhanced-health-type" : "basic",
+    "additional-options"   : "\"aws:autoscaling:launchconfiguration,SecurityGroups\"=\"sg-475d2823\";\"aws:ec2:vpc,Subnets\"=\"subnet-d82072b1\"",
+    "solution-stack"       : "64bit Amazon Linux 2 v2.0.1 running .NET Core",
+    "environment-type"     : "SingleInstance",
+    "cname"                : "reedonline",
+    "instance-type"        : "t3a.medium",
+    "key-pair"             : "",
+    "instance-profile"     : "aws-elasticbeanstalk-ec2-role",
+    "service-role"         : "aws-elasticbeanstalk-service-role",
+    "proxy-server"         : "nginx",
+    "profile"              : "FakeReedProject",
+    "health-check-url"     : "/",
+    "iis-website"          : "Default Web Site",
+    "app-path"             : "/"
+}

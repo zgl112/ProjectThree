@@ -48,20 +48,21 @@ namespace API
             {
                 app.UseDeveloperExceptionPage();
 
-
-                app.UseDefaultFiles();
-                app.UseStaticFiles();
-
-                app.UseRouting();
-
-                app.UseAuthorization();
-                app.UseCors("CorsPolicy");
-                app.UseEndpoints(endpoints =>
-                {
-                    endpoints.MapControllers();
-                    endpoints.MapFallbackToController("Index", "Fallback");
-                });
             }
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+            app.UseCors("CorsPolicy");
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapFallbackToController("Index", "Fallback");
+            });
+
         }
     }
 }
+
