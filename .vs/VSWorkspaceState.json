@@ -8,6 +8,6 @@
     "\\Application\\ElasticSearch",
     "\\Application\\JobsApi"
   ],
-  "SelectedNode": "\\API\\Properties\\launchSettings.json",
+  "SelectedNode": "\\Application\\Settings.cs",
   "PreviewInSolutionExplorer": false
 }
