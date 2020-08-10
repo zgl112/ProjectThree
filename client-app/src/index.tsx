@@ -9,16 +9,22 @@ import * as serviceWorker from "./serviceWorker";
 import ScrollToTop from "./App/Layout/ScrollToTop";
 import "react-toastify/dist/ReactToastify.min.css";
 import dateFnsLocalizer from "react-widgets-date-fns";
-
+import { Auth0Provider } from "@auth0/auth0-react";
 dateFnsLocalizer();
 
 export const history = createBrowserHistory();
 
 ReactDOM.render(
   <Router history={history}>
-    <ScrollToTop>
-      <App />
-    </ScrollToTop>
+    <Auth0Provider
+      domain="dev-x8oimlm2.eu.auth0.com"
+      clientId="vIyYcN1o5WfQOFQEj23GrucFSITQ5UMn"
+      redirectUri={window.location.origin}
+    >
+      <ScrollToTop>
+        <App />
+      </ScrollToTop>
+    </Auth0Provider>
   </Router>,
 
   document.getElementById("root")
