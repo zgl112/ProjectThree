@@ -34,6 +34,7 @@ export class JobsStore {
   @observable indexButton = false;
   @observable isuggestion?: ISuggest;
   @observable suggestions?: ISuggest[];
+  @observable activeTab: number = 0;
 
   @action createIndex = async () => {
     this.indexButton = true;
@@ -45,6 +46,10 @@ export class JobsStore {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  @action setActiveTab = (activeIndex: number) => {
+    this.activeTab = activeIndex;
   };
 
   @action trendingQuery = async (data: string) => {

@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { history } from "../..";
 import { ICounter, IJobResult, IListSearchResult } from "../Models/Models";
 
-axios.defaults.baseURL = "/api/search";
+axios.defaults.baseURL = "http://localhost:5000/api/search";
 
 axios.interceptors.response.use(undefined, (error) => {
   if (error.message === "Network Error" && !error.respone) {

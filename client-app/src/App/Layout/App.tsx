@@ -17,6 +17,7 @@ import SearchResults from "../../Features/JobSeekerLandingPage/SearchResults";
 import DetailedView from "../../Features/JobSeekerLandingPage/DetailedView";
 import "mobx-react-lite/batchingForReactDom";
 import { history } from "../../index";
+import Profile from "../../Features/Users/Profile";
 const App = () => {
   return (
     <Fragment>
@@ -53,6 +54,7 @@ const App = () => {
                   <Route exact path="/recruiting" component={Recruiting} />
                   <Route exact path="/registercv" component={RegisterCV} />
                   <Route exact path="/signin/" component={SignIn} />
+                  <Route exact path="/profile" component={Profile} />
                   <Route
                     exact
                     path="/shortlistedjobs"

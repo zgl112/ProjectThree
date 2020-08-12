@@ -25,7 +25,6 @@ const Cards: React.FC<{
   loadingInitial: boolean;
   jobsPag: IJobResult[];
 }> = ({ jobs, loadingInitial, jobsPag }) => {
-  console.log(jobsPag);
   if (loadingInitial)
     return (
       <CardGroup style={{ boxShadow: "none" }}>

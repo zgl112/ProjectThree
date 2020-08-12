@@ -7,9 +7,9 @@ import Logout from "../../App/Auth/Logout";
 export const CareerAdvice = () => {
   return (
     <Container>
+      <UnderConstruction />
       <Login />
       <Logout />
-      <UnderConstruction />
     </Container>
   );
 };
