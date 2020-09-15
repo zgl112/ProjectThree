@@ -22,6 +22,7 @@ Project Three is a projected created by Stephane Emptage and Alex Paiu whilst tr
 1. Copy and clone our repository.
 
 2.  This step will require to have Docker installed. If you don't have Docker installed, you can have a copy from [here](https://www.docker.com/products/docker-desktop). Using your terminal, navigate to the docker-elk folder from our repository and run the `docker-compose up -d` script. This will initialise a new Docker image with ElasticSearch and Kibana up and running. 
+
 Optional : If you don't want to install Docker into your machine, you can go ahead on the [Elastic Cloud](https://cloud.elastic.co/registration?elektra=downloads-overview&storm=elasticsearch) website and register to get a free 14 days trial. You will then be provided with an username, password and an URL which can be added to configure the appsettings.json file from the API folder, to save your data online.
 
 3. As some files where excluded for brevity during commits, you need to navigate to the client-app folder and run the `npm install` script. This will install all the packages used to develop this project.
