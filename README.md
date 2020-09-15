@@ -33,7 +33,7 @@ Project Three is a projected created by Stephane Emptage and Alex Paiu whilst tr
 
 7. Navigate to the API folder,  then run the `dotnet watch run` script. This will spin up the back-end services.
 
-8. Once the website loads, please go to the Courses tab in the navigation bar. Press and hold down shift + z. This will reveal a button that you have to press which will automatically export jobs from the recruitment API and import them into your ElasticSearch cluster. Allow some time for this process to load. 
+8. Once the website loads, please go to the Courses tab in the navigation bar. Press and hold down `shift + z `. This will reveal a button that you have to press which will automatically export jobs from the recruitment API and import them into your ElasticSearch cluster. Allow some time for this process to load. 
 
 ### Suggestions
 
