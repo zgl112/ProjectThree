@@ -25,7 +25,7 @@ Project Three is a projected created by Stephane Emptage and Alex Paiu whilst tr
 
 3. As some files where excluded for brevity during commits, you need to navigate to the client-app folder and run the `npm install` script. This will install all the packages used to develop this project.
 
-4.You need to visit Reed's [website](https://www.reed.co.uk/developers/jobseeker) and sign up for an API key. You need to add these to the appsettings.json file located in the API folder. 
+4. You need to visit Reed's [website](https://www.reed.co.uk/developers/jobseeker) and sign up for an API key. You need to add these to the appsettings.json file located in the API folder. 
 
 5. To configure the Auth0 service you need to visit their [website](https://auth0.com/signup?&signUpData=%7B%22category%22%3A%22button%22%7D)  and create a free account. It will allow you to have up to 7,000 free active users & unlimited logins. The credentials received will be placed in the .env file inside the client-app folder.
 
