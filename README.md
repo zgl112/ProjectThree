@@ -1,7 +1,7 @@
 # ProjectThree 
 ---
 
-Project Three is a projected created by Stephane Emptage and Alex Paiu whilst training in their apprenticeship. It is a proof of concept to show the business a prototype of what a React based recruitment site would look like and how it would work, when the business eventually transitions to using React.  
+Project Three is a project created by Stephane Emptage and Alex Paiu whilst training in their apprenticeship. It is a proof of concept to show the business a prototype of what a React based recruitment site would look like and how it would work, when the business eventually transitions to using React.  
 
 
 ### Tech Stack and technologies used:
